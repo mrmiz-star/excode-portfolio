@@ -1,3 +1,5 @@
+import excodeSentinelImg from '../assets/EXCODE-Discord-Management-System.png';
+
 export const projects = [
   {
     id: 1,
@@ -84,27 +86,27 @@ export const projects = [
     color: "#5865f2",
   },
   {
-  id: 7,
-  title: "EXCODE Sentinel",
-  slug: "excode-discord-management-system",
-  impact:
-    "Async event-driven Discord moderation platform with AI-assisted threat detection, Flask admin telemetry dashboard, sentiment analysis, and automated escalation pipelines.",
-  image: "/src/assets/EXCODE-Discord-Management-System.png",
-  tech: [
-    "Python",
-    "discord.py",
-    "Flask",
-    "SQLite",
-    "VADER",
-    "OpenRouter"
-  ],
-  category: "Security",
-  status: "production",
-  featured: true,
-  github:
-    "https://github.com/qarizafar12-max/EXCODE-Discord-Management-System",
-  demo: "#",
-  color: "#5865f2",
+    id: 7,
+    title: "EXCODE Sentinel",
+    slug: "excode-discord-management-system",
+    impact:
+      "Async event-driven Discord moderation platform with AI-assisted threat detection, Flask admin telemetry dashboard, sentiment analysis, and automated escalation pipelines.",
+    image: excodeSentinelImg,
+    tech: [
+      "Python",
+      "discord.py",
+      "Flask",
+      "SQLite",
+      "VADER",
+      "OpenRouter"
+    ],
+    category: "Security",
+    status: "production",
+    featured: true,
+    github:
+      "https://github.com/qarizafar12-max/EXCODE-Discord-Management-System",
+    demo: "#",
+    color: "#5865f2",
   },
 ];
 
