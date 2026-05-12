@@ -462,6 +462,10 @@ body {
     padding: 8px 16px !important;
     font-size: 0.75rem !important;
   }
+
+  .hero-boot-logs {
+    display: none !important;
+  }
 }
 
 /* ── Performance ── */

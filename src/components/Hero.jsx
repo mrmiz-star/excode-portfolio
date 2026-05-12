@@ -100,7 +100,7 @@ function BootLogs() {
       fontFamily: "'Share Tech Mono', monospace", fontSize: '0.65rem',
       color: 'rgba(0,255,231,0.5)', textAlign: 'left',
       zIndex: 5, pointerEvents: 'none'
-    }} className="animate-fadeIn delay-700">
+    }} className="hero-boot-logs animate-fadeIn delay-700">
       <div style={{ marginBottom: '6px', opacity: 0.3, fontSize: '0.55rem' }}>TERMINAL_BOOT_LOG_V2.01</div>
       {logs.map((log, i) => (
         <div key={i} style={{ marginBottom: '2px' }}>

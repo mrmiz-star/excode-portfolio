@@ -71,7 +71,7 @@ export default function ProjectGrid() {
       {/* Grid */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))',
         gap: '24px',
       }}>
         {filtered.map((project, i) => (
