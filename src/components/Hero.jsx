@@ -48,19 +48,20 @@ function useTyped(strings, speed = 80, pause = 1800) {
   return text;
 }
 
-function StatBadge({ icon: Icon, label, value, color = '#00ffe7' }) {
+function StatBadge({ icon: Icon, label, value, color = 'var(--color-primary)' }) {
   return (
     <div style={{
-      display:'flex',flexDirection:'column',gap:'4px',padding:'16px 20px',
-      background:'rgba(6,22,38,0.8)',border:`1px solid ${color}28`,borderRadius:'12px',
-      backdropFilter:'blur(12px)',minWidth:'110px',transition:'all 0.3s ease',cursor:'default',
+      display:'flex',flexDirection:'column',gap:'6px',padding:'18px 24px',
+      background:'var(--color-bg-card)',border:`1px solid var(--color-border-dim)`,borderRadius:'16px',
+      backdropFilter:'blur(20px)',minWidth:'120px',transition:'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)',cursor:'default',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
     }}
-      onMouseEnter={e=>{e.currentTarget.style.borderColor=color+'80';e.currentTarget.style.boxShadow=`0 0 20px ${color}20`;e.currentTarget.style.transform='translateY(-2px)';}}
-      onMouseLeave={e=>{e.currentTarget.style.borderColor=color+'28';e.currentTarget.style.boxShadow='none';e.currentTarget.style.transform='translateY(0)';}}
+      onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--color-border-bright)';e.currentTarget.style.boxShadow=`0 0 30px ${color}20`;e.currentTarget.style.transform='translateY(-4px)';}}
+      onMouseLeave={e=>{e.currentTarget.style.borderColor='var(--color-border-dim)';e.currentTarget.style.boxShadow='0 4px 12px rgba(0,0,0,0.2)';e.currentTarget.style.transform='translateY(0)';}}
     >
-      <Icon size={16} color={color} style={{opacity:0.8}}/>
-      <span style={{fontSize:'1.4rem',fontWeight:800,color,fontFamily:"'Share Tech Mono',monospace",lineHeight:1}}>{value}</span>
-      <span style={{fontSize:'0.7rem',color:'rgba(200,216,232,0.5)',letterSpacing:'0.06em',textTransform:'uppercase'}}>{label}</span>
+      <Icon size={18} color={color} style={{opacity:0.9}}/>
+      <span style={{fontSize:'1.6rem',fontWeight:800,color,fontFamily:"var(--font-mono)",lineHeight:1,marginTop:'4px'}}>{value}</span>
+      <span style={{fontSize:'0.65rem',color:'var(--color-text-dim)',letterSpacing:'0.1em',textTransform:'uppercase',fontWeight:600}}>{label}</span>
     </div>
   );
 }
@@ -108,7 +109,7 @@ function BootLogs() {
         </div>
       ))}
       {logs.length === allLogs.length && (
-        <div style={{ marginTop: '4px', color: '#39ff14', animation: 'flicker 2s infinite' }}>
+        <div style={{ marginTop: '4px', color: 'var(--color-accent)', animation: 'flicker 2s infinite' }}>
           {'>'} LISTENING_FOR_INPUT
         </div>
       )}
@@ -162,7 +163,7 @@ export default function Hero() {
   return (
     <section id="home" style={{
       position:'relative',minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',
-      overflow:'hidden',background:'linear-gradient(160deg,#020b14 0%,#041525 50%,#020b14 100%)',
+      overflow:'hidden',background:'radial-gradient(circle at 50% 50%, #0a111a 0%, #050a0f 100%)',
     }}>
       <canvas ref={canvasRef} style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0.6}}/>
       <div style={{position:'absolute',top:'40%',left:'50%',transform:'translate(-50%,-50%)',width:'600px',height:'600px',
@@ -185,8 +186,17 @@ export default function Hero() {
         </div>
 
         {/* Name */}
-        <h1 className="animate-fadeInUp delay-100" style={{fontSize:'clamp(3rem,8vw,7rem)',fontWeight:900,lineHeight:1,marginBottom:'12px',letterSpacing:'-0.02em'}}>
-          <span style={{color:'#00ffe7',display:'block',textShadow:'0 0 40px rgba(0,255,231,0.5),0 0 80px rgba(0,255,231,0.2)',animation:'glow-pulse 3s ease-in-out infinite'}}>
+        <h1 className="animate-fadeInUp delay-100" style={{fontSize:'clamp(3.5rem,10vw,8rem)',fontWeight:900,lineHeight:0.9,marginBottom:'16px',letterSpacing:'-0.03em'}}>
+          <span style={{
+            color:'var(--color-primary)',
+            display:'block',
+            textShadow:'0 0 40px var(--color-primary-glow)',
+            animation:'glow-pulse 3s ease-in-out infinite',
+            background: 'linear-gradient(to bottom, #fff 0%, var(--color-primary) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            filter: 'drop-shadow(0 0 20px var(--color-primary-glow))'
+          }}>
             {identity.developerName}
           </span>
         </h1>
@@ -200,7 +210,7 @@ export default function Hero() {
         </div>
 
         {/* Tagline */}
-        <p className="animate-fadeInUp delay-300" style={{fontSize:'1.05rem',color:'rgba(200,216,232,0.55)',maxWidth:'540px',margin:'0 auto 48px',lineHeight:1.7,fontWeight:300}}>
+        <p className="animate-fadeInUp delay-300" style={{fontSize:'1.05rem',color:'var(--color-text-dim)',maxWidth:'540px',margin:'0 auto 48px',lineHeight:1.7,fontWeight:300}}>
           {identity.tagline}.<br/>
           I engineer production-grade tools — from kernel-level C++ to hardened backend APIs.
           Security, performance, and real delivery. Shipped, not just planned.
@@ -225,11 +235,11 @@ export default function Hero() {
         </div>
 
         {/* Stats */}
-        <div className="animate-fadeInUp delay-500" style={{display:'flex',gap:'12px',justifyContent:'center',flexWrap:'wrap'}}>
-          <StatBadge icon={Terminal} label="Projects" value="6+" color="#00ffe7"/>
-          <StatBadge icon={Cpu} label="Languages" value="5+" color="#bf00ff"/>
-          <StatBadge icon={Zap} label="Commits" value="200+" color="#39ff14"/>
-          <StatBadge icon={Wifi} label="Status" value="LIVE" color="#00aaff"/>
+        <div className="animate-fadeInUp delay-500" style={{display:'flex',gap:'16px',justifyContent:'center',flexWrap:'wrap'}}>
+          <StatBadge icon={Terminal} label="Projects" value="6+" color="var(--color-primary)"/>
+          <StatBadge icon={Cpu} label="Stack" value="12+" color="var(--color-secondary)"/>
+          <StatBadge icon={Zap} label="Uptime" value="99.9%" color="var(--color-accent)"/>
+          <StatBadge icon={Wifi} label="Network" value="LIVE" color="#00aaff"/>
         </div>
       </div>
 

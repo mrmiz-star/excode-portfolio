@@ -55,12 +55,12 @@ export default function Contact() {
     }}>
       <div style={{ maxWidth: '960px', margin: '0 auto' }}>
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '72px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
           <span className="section-label">// contact.terminal</span>
-          <h2 style={{ fontSize: 'clamp(2rem,4vw,3rem)', fontWeight: 800, color: '#fff', marginTop: '12px', marginBottom: '16px' }}>
-            Open a <span style={{ color: '#00ffe7', textShadow: '0 0 30px rgba(0,255,231,0.4)' }}>Channel</span>
+          <h2 style={{ fontSize: 'clamp(2.5rem,5vw,3.5rem)', fontWeight: 800, color: '#fff', marginTop: '12px', marginBottom: '16px', letterSpacing: '-0.02em' }}>
+            Open a <span style={{ color: 'var(--color-primary)', textShadow: '0 0 30px var(--color-primary-glow)' }}>Channel</span>
           </h2>
-          <p style={{ color: 'rgba(200,216,232,0.5)', maxWidth: '400px', margin: '0 auto', fontSize: '1rem', lineHeight: 1.7 }}>
+          <p style={{ color: 'var(--color-text-dim)', maxWidth: '480px', margin: '0 auto', fontSize: '1.05rem', lineHeight: 1.7 }}>
             Have a project or want to collaborate? Drop a message — I respond fast.
           </p>
         </div>
@@ -102,14 +102,15 @@ export default function Contact() {
 
             {/* Availability indicator */}
             <div style={{
-              marginTop: '8px', padding: '16px 20px', borderRadius: '12px',
-              background: 'rgba(57,255,20,0.05)', border: '1px solid rgba(57,255,20,0.2)',
-              display: 'flex', alignItems: 'center', gap: '12px',
+              marginTop: '12px', padding: '18px 24px', borderRadius: '16px',
+              background: 'rgba(204, 255, 0, 0.05)', border: '1px solid var(--color-accent-glow)',
+              display: 'flex', alignItems: 'center', gap: '14px',
+              backdropFilter: 'blur(10px)'
             }}>
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#39ff14', boxShadow: '0 0 10px #39ff14', animation: 'glow-pulse 1.5s ease-in-out infinite', display: 'inline-block', flexShrink: 0 }} />
+              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--color-accent)', boxShadow: '0 0 10px var(--color-accent-glow)', animation: 'glow-pulse 1.5s ease-in-out infinite', display: 'inline-block', flexShrink: 0 }} />
               <div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#39ff14', marginBottom: '2px' }}>Available Now</div>
-                <div style={{ fontSize: '0.75rem', color: 'rgba(200,216,232,0.45)' }}>Open to freelance & full-time</div>
+                <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-accent)', marginBottom: '2px', fontFamily: 'var(--font-mono)' }}>AVAILABLE NOW</div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--color-text-dim)' }}>Open to freelance & full-time</div>
               </div>
             </div>
           </div>
@@ -155,20 +156,18 @@ export default function Contact() {
             )}
 
             <button type="submit" disabled={status === 'sending'} style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
-              padding: '13px 24px', borderRadius: '10px', cursor: status === 'sending' ? 'not-allowed' : 'pointer',
-              fontFamily: "'Share Tech Mono', monospace", fontSize: '0.85rem',
-              letterSpacing: '0.08em', textTransform: 'uppercase',
-              color: '#020b14', fontWeight: 700, border: 'none',
-              background: 'linear-gradient(135deg, #00ffe7, #00b8a9)',
-              boxShadow: '0 0 24px rgba(0,255,231,0.35)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
+              padding: '14px 28px', borderRadius: '12px', cursor: status === 'sending' ? 'not-allowed' : 'pointer',
+              fontFamily: "var(--font-mono)", fontSize: '0.85rem',
+              letterSpacing: '0.1em', textTransform: 'uppercase',
+              color: 'var(--color-bg-deep)', fontWeight: 800, border: 'none',
+              background: 'linear-gradient(135deg, var(--color-primary), #00b8a9)',
+              boxShadow: '0 0 24px var(--color-primary-glow)',
               opacity: status === 'sending' ? 0.7 : 1,
-              transition: 'all 0.3s ease',
+              transition: 'all 0.3s cubic-bezier(0.23, 1, 0.32, 1)',
             }}
-              onMouseEnter={e => { if (status !== 'sending') { e.currentTarget.style.boxShadow = '0 0 40px rgba(0,255,231,0.55)'; e.currentTarget.style.transform = 'translateY(-1px)'; } }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 24px rgba(0,255,231,0.35)'; e.currentTarget.style.transform = 'none'; }}
             >
-              <Send size={15} />
+              <Send size={16} />
               {status === 'sending' ? 'Sending...' : 'Send Message'}
             </button>
           </form>

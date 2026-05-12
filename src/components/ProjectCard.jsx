@@ -9,14 +9,14 @@ function GithubIcon({ size = 16 }) {
   );
 }
 
-export default function ProjectCard({ project, index }) {
+export default function ProjectCard({ project, index, onOpenDetails }) {
   const [hovered, setHovered] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const statusConfig = {
-    production:  { color: '#39ff14', label: 'Production' },
+    production:  { color: 'var(--color-primary)', label: 'Production' },
     'in-progress': { color: '#ffd700', label: 'In Progress' },
-    concept:     { color: '#00aaff', label: 'Concept' },
+    concept:     { color: 'var(--color-secondary)', label: 'Concept' },
   };
 
   const currentStatus = statusConfig[project.status] || statusConfig.production;
@@ -31,22 +31,48 @@ export default function ProjectCard({ project, index }) {
   return (
     <>
       <div
+        onClick={() => onOpenDetails(project)}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className="animate-fadeInUp glass-card"
         style={{
           animationDelay: `${index * 0.1}s`,
-          padding: '20px',
+          padding: '24px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '16px',
+          gap: '20px',
+          cursor: 'pointer',
+          height: '100%'
         }}
       >
         {/* Project Image Section */}
-        <div className="project-image-container">
+        <div className="project-image-container" style={{ borderRadius: '16px' }}>
           {/* Status Badge */}
-          <div className="status-badge" style={{ backgroundColor: currentStatus.color }}>
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#fff', boxShadow: '0 0 8px #fff' }} />
+          <div className="status-badge" style={{ 
+            backgroundColor: 'rgba(5, 10, 15, 0.8)', 
+            border: `1px solid ${currentStatus.color}`,
+            width: 'auto',
+            height: 'auto',
+            padding: '4px 10px',
+            borderRadius: '8px',
+            top: '12px',
+            left: '12px'
+          }}>
+            <div style={{ 
+              width: '6px', 
+              height: '6px', 
+              borderRadius: '50%', 
+              background: currentStatus.color, 
+              boxShadow: `0 0 8px ${currentStatus.color}`,
+              marginRight: '6px'
+            }} />
+            <span style={{ 
+              fontFamily: 'var(--font-mono)', 
+              fontSize: '0.6rem', 
+              color: '#fff', 
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase'
+            }}>{currentStatus.label}</span>
           </div>
           
           <img 
@@ -55,15 +81,21 @@ export default function ProjectCard({ project, index }) {
             className="project-image"
           />
           <div className="project-overlay" />
+          
+          {/* Hover View Detail Indicator */}
+          <div className={`view-detail-hint ${hovered ? 'visible' : ''}`} style={{ background: 'rgba(0, 229, 255, 0.2)' }}>
+            <Info size={24} />
+            <span style={{ fontSize: '0.9rem', fontWeight: 700 }}>SYSTEM SPECS</span>
+          </div>
         </div>
 
         {/* Project Content */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <h3 className="card-title">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <h3 className="card-title" style={{ fontSize: '1.4rem' }}>
             {project.title}
           </h3>
           
-          <p className="card-impact">
+          <p className="card-impact" style={{ color: 'var(--color-text-dim)', fontSize: '0.9rem', lineHeight: 1.6 }}>
             {project.impact}
           </p>
         </div>
@@ -71,33 +103,33 @@ export default function ProjectCard({ project, index }) {
         {/* Tech Tags */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: 'auto' }}>
           {project.tech.slice(0, 5).map(t => (
-            <span key={t} className="tech-tag">
+            <span key={t} className="tech-tag" style={{ borderRadius: '6px' }}>
               {t}
             </span>
           ))}
         </div>
 
         {/* Action Buttons */}
-        <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+        <div style={{ display: 'flex', gap: '12px', marginTop: '12px' }} onClick={e => e.stopPropagation()}>
           <a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-neon"
-            style={{ flex: 1, justifyContent: 'center' }}
+            style={{ flex: 1, justifyContent: 'center', padding: '12px', borderRadius: '10px' }}
           >
             <GithubIcon size={16} /> GitHub
           </a>
           
           <a
-            href={project.demo || '#'}
+            href={project.demo && project.demo !== '#' ? project.demo : '#'}
             onClick={handleDemoClick}
-            target={project.demo ? "_blank" : "_self"}
+            target={project.demo && project.demo !== '#' ? "_blank" : "_self"}
             rel="noopener noreferrer"
-            className="btn-neon btn-youtube"
-            style={{ flex: 1, justifyContent: 'center' }}
+            className="btn-neon btn-secondary"
+            style={{ flex: 1, justifyContent: 'center', padding: '12px', borderRadius: '10px' }}
           >
-            <PlayCircle size={16} /> Demo ▶
+            <PlayCircle size={16} /> Demo
           </a>
         </div>
       </div>
@@ -105,7 +137,7 @@ export default function ProjectCard({ project, index }) {
       {/* Demo Coming Soon Modal */}
       {showModal && (
         <div className="modal-backdrop" onClick={() => setShowModal(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <div className="modal-content" style={{ borderColor: 'var(--color-primary)', boxShadow: '0 0 40px var(--color-primary-glow)' }} onClick={e => e.stopPropagation()}>
             <X 
               className="modal-close" 
               size={24} 
@@ -115,20 +147,20 @@ export default function ProjectCard({ project, index }) {
               display: 'inline-flex', 
               padding: '16px', 
               borderRadius: '50%', 
-              background: 'rgba(0, 255, 231, 0.1)',
+              background: 'rgba(0, 229, 255, 0.1)',
               marginBottom: '24px',
-              border: '1px solid rgba(0, 255, 231, 0.3)'
+              border: '1px solid var(--color-border-dim)'
             }}>
-              <Info size={40} color="#00ffe7" />
+              <Info size={40} color="var(--color-primary)" />
             </div>
             <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#fff', marginBottom: '12px' }}>
               🚧 Demo Coming Soon
             </h2>
-            <p style={{ color: 'rgba(200, 216, 232, 0.6)', lineHeight: 1.6, marginBottom: '32px' }}>
+            <p style={{ color: 'var(--color-text-dim)', lineHeight: 1.6, marginBottom: '32px' }}>
               This project walkthrough is currently being prepared. Check back later for the full visual breakdown.
             </p>
             <button 
-              className="btn-neon-solid btn-neon" 
+              className="btn-neon-solid" 
               style={{ width: '100%', justifyContent: 'center' }}
               onClick={() => setShowModal(false)}
             >
@@ -140,3 +172,4 @@ export default function ProjectCard({ project, index }) {
     </>
   );
 }
+

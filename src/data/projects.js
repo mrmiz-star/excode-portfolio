@@ -6,6 +6,7 @@ export const projects = [
     title: "Shop Management System",
     slug: "shop-management",
     impact: "Full retail ERP system — POS, inventory, credit ledger, distribution tracking, and AI-driven analytics.",
+    fullDesc: "A comprehensive retail enterprise resource planning (ERP) solution designed for modern shop management. Features include a high-speed Point of Sale (POS) system, real-time inventory management with automated low-stock alerts, a robust credit ledger for customer accounts, and detailed distribution tracking. The system utilizes AI-driven analytics to provide insights into sales trends and stock optimization.",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop",
     tech: ["Python", "Flask", "SQLite"],
     category: "Backend",
@@ -20,6 +21,7 @@ export const projects = [
     title: "MIZ FPS Optimizer",
     slug: "miz-fps-optimizer",
     impact: "Performance optimization toolkit for low-end gaming systems with DLL injection and HWID security.",
+    fullDesc: "A high-performance optimization toolkit engineered for competitive gaming on low-end hardware. The system utilizes advanced DLL injection techniques to modify game engine parameters for maximum FPS gains. It includes a secure HWID-based authentication system to prevent unauthorized distribution and a clean, lightweight dashboard for real-time performance monitoring.",
     image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop",
     tech: ["C++", "CMake", "Python"],
     category: "Systems",
@@ -34,6 +36,7 @@ export const projects = [
     title: "MIZ Licensing Backend",
     slug: "miz-license-backend",
     impact: "Secure licensing infrastructure with automated Discord delivery systems and zero-trust auth.",
+    fullDesc: "A zero-trust licensing infrastructure built for secure software distribution. The backend handles automated license key generation, validation, and delivery through integrated Discord webhooks. Features include multi-factor authentication, IP-locking, and a comprehensive admin panel for managing active seats and usage telemetry.",
     image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc4b?q=80&w=1200&auto=format&fit=crop",
     tech: ["Python", "Flask", "SQLite"],
     category: "Security",
@@ -48,6 +51,7 @@ export const projects = [
     title: "EX CODE Portfolio",
     slug: "ex-code-portfolio",
     impact: "Clean, cyber-engineering portfolio system that showcases real projects through powerful cards.",
+    fullDesc: "A bespoke portfolio system designed for high-authority software engineering showcases. Built with React and Vite, the platform features a glassmorphic UI, smooth scroll-reveal animations, and a project-focused architecture. The design prioritizes speed, readability, and a professional 'cyber-engineering' aesthetic that appeals to recruiters and clients alike.",
     image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop",
     tech: ["React", "Vite", "JavaScript"],
     category: "Tools",
@@ -62,6 +66,7 @@ export const projects = [
     title: "AI Demand Forecaster",
     slug: "ai-demand-forecaster",
     impact: "Experimental neural network for predicting inventory requirements in retail environments.",
+    fullDesc: "An experimental machine learning project focused on demand forecasting for retail supply chains. Utilizing TensorFlow and Scikit-learn, the neural network analyzes historical sales data, seasonal trends, and external variables to predict future inventory requirements with high accuracy. The project aims to reduce overstock and minimize lost sales due to stockouts.",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop",
     tech: ["Python", "TensorFlow", "Scikit-learn"],
     category: "AI",
@@ -76,6 +81,7 @@ export const projects = [
     title: "Discord Sentinel",
     slug: "discord-sentinel",
     impact: "Automated server protection system with real-time threat detection and modular anti-spam.",
+    fullDesc: "A modular Discord bot designed for automated server security and community management. Features include real-time threat detection, advanced anti-spam algorithms, and automated moderation actions. The bot is built using discord.py and features a persistent SQLite backend for logging and member tracking.",
     image: "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?q=80&w=1200&auto=format&fit=crop",
     tech: ["discord.py", "Python", "SQLite"],
     category: "Automation",
@@ -91,6 +97,7 @@ export const projects = [
     slug: "excode-discord-management-system",
     impact:
       "Async event-driven Discord moderation platform with AI-assisted threat detection, Flask admin telemetry dashboard, sentiment analysis, and automated escalation pipelines.",
+    fullDesc: "EXCODE Sentinel is a state-of-the-art Discord management system engineered for high-security environments. It features an asynchronous, event-driven architecture that handles massive message throughput. Integrated AI capabilities include VADER-based sentiment analysis and OpenRouter-assisted threat detection. The system is managed via a professional Flask admin dashboard that provides real-time telemetry, audit logs, and modular command control.",
     image: excodeSentinelImg,
     tech: [
       "Python",
@@ -108,6 +115,7 @@ export const projects = [
     demo: "#",
     color: "#5865f2",
   },
+
 ];
 
 export const categories = ["All", "Systems", "Backend", "Automation", "Mobile", "AI", "Security", "Tools"];

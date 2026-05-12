@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { projects, categories } from '../data/projects';
 import ProjectCard from './ProjectCard';
+import ProjectModal from './ProjectModal';
 import { Filter } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
-export default function ProjectGrid() {
+export default function ProjectGrid({ onOpenDetails }) {
   const [active, setActive] = useState('All');
   const [ref, isVisible] = useScrollReveal();
 
@@ -23,44 +24,46 @@ export default function ProjectGrid() {
           // projects.exe
         </span>
         <h2 style={{
-          fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800,
+          fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800,
           color: '#fff', marginTop: '12px', marginBottom: '16px',
+          letterSpacing: '-0.02em'
         }}>
-          What I've <span style={{ color: '#00ffe7', textShadow: '0 0 30px rgba(0,255,231,0.4)' }}>Shipped</span>
+          What I've <span style={{ color: 'var(--color-primary)', textShadow: '0 0 30px var(--color-primary-glow)' }}>Shipped</span>
         </h2>
         <p style={{
-          color: 'rgba(200,216,232,0.5)', maxWidth: '480px', margin: '0 auto 40px',
-          fontSize: '1rem', lineHeight: 1.7,
+          color: 'var(--color-text-dim)', maxWidth: '480px', margin: '0 auto 48px',
+          fontSize: '1.05rem', lineHeight: 1.7,
         }}>
           Real projects. Real code. Deployed and battle-tested.
         </p>
 
         {/* Category filters */}
         <div style={{
-          display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap',
+          display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap',
         }}>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
-            marginRight: '4px', color: 'rgba(0,255,231,0.4)',
+            marginRight: '6px', color: 'var(--color-primary)', opacity: 0.5
           }}>
-            <Filter size={14} />
+            <Filter size={16} />
           </div>
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
               style={{
-                padding: '7px 18px', borderRadius: '20px', cursor: 'pointer',
-                fontFamily: "'Share Tech Mono', monospace", fontSize: '0.75rem',
+                padding: '8px 20px', borderRadius: '12px', cursor: 'pointer',
+                fontFamily: "var(--font-mono)", fontSize: '0.75rem',
                 letterSpacing: '0.08em', textTransform: 'uppercase',
-                border: active === cat ? '1px solid #00ffe7' : '1px solid rgba(0,255,231,0.2)',
-                color: active === cat ? '#020b14' : 'rgba(200,216,232,0.6)',
-                background: active === cat ? '#00ffe7' : 'rgba(0,255,231,0.04)',
-                boxShadow: active === cat ? '0 0 16px rgba(0,255,231,0.35)' : 'none',
-                transition: 'all 0.25s ease',
+                border: active === cat ? '1px solid var(--color-primary)' : '1px solid var(--color-border-dim)',
+                color: active === cat ? 'var(--color-bg-deep)' : 'var(--color-text-dim)',
+                background: active === cat ? 'var(--color-primary)' : 'var(--color-bg-card)',
+                boxShadow: active === cat ? '0 0 20px var(--color-primary-glow)' : 'none',
+                transition: 'all 0.3s cubic-bezier(0.23, 1, 0.32, 1)',
+                fontWeight: active === cat ? 700 : 500,
               }}
-              onMouseEnter={e => { if (active !== cat) { e.currentTarget.style.borderColor = 'rgba(0,255,231,0.5)'; e.currentTarget.style.color = '#00ffe7'; } }}
-              onMouseLeave={e => { if (active !== cat) { e.currentTarget.style.borderColor = 'rgba(0,255,231,0.2)'; e.currentTarget.style.color = 'rgba(200,216,232,0.6)'; } }}
+              onMouseEnter={e => { if (active !== cat) { e.currentTarget.style.borderColor = 'var(--color-border-bright)'; e.currentTarget.style.color = 'var(--color-primary)'; e.currentTarget.style.background = 'rgba(0, 229, 255, 0.08)'; } }}
+              onMouseLeave={e => { if (active !== cat) { e.currentTarget.style.borderColor = 'var(--color-border-dim)'; e.currentTarget.style.color = 'var(--color-text-dim)'; e.currentTarget.style.background = 'var(--color-bg-card)'; } }}
             >
               {cat}
             </button>
@@ -75,7 +78,12 @@ export default function ProjectGrid() {
         gap: '24px',
       }}>
         {filtered.map((project, i) => (
-          <ProjectCard key={project.id} project={project} index={i} />
+          <ProjectCard 
+            key={project.id} 
+            project={project} 
+            index={i} 
+            onOpenDetails={onOpenDetails}
+          />
         ))}
       </div>
 
@@ -92,3 +100,5 @@ export default function ProjectGrid() {
     </section>
   );
 }
+
+

@@ -27,10 +27,10 @@ export default function Navbar() {
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
         transition: 'all 0.4s ease',
         background: scrolled
-          ? 'rgba(2,11,20,0.92)'
+          ? 'rgba(5, 10, 15, 0.85)'
           : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(0,255,231,0.1)' : 'none',
+        backdropFilter: scrolled ? 'blur(16px)' : 'none',
+        borderBottom: scrolled ? '1px solid var(--color-border-dim)' : 'none',
         boxShadow: scrolled ? '0 4px 40px rgba(0,0,0,0.5)' : 'none',
       }}
     >
@@ -53,20 +53,20 @@ export default function Navbar() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{
-              fontFamily: "'Share Tech Mono', monospace",
-              fontSize: '1.1rem',
-              fontWeight: 700,
-              color: '#00ffe7',
-              textShadow: '0 0 12px rgba(0,255,231,0.5)',
+              fontFamily: "var(--font-mono)",
+              fontSize: '1.2rem',
+              fontWeight: 800,
+              color: 'var(--color-primary)',
+              textShadow: '0 0 12px var(--color-primary-glow)',
               letterSpacing: '0.05em',
               lineHeight: 1.1
             }}>
               {identity.developerName}
             </span>
             <span style={{
-              fontFamily: "'Share Tech Mono', monospace",
+              fontFamily: "var(--font-mono)",
               fontSize: '0.65rem',
-              color: 'rgba(200,216,232,0.5)',
+              color: 'var(--color-text-dim)',
               letterSpacing: '0.05em',
               textTransform: 'uppercase'
             }}>
@@ -114,26 +114,18 @@ export default function Navbar() {
             style={{
               marginLeft: '12px',
               padding: '8px 20px',
-              borderRadius: '7px',
-              fontFamily: "'Share Tech Mono', monospace",
+              borderRadius: '10px',
+              fontFamily: "var(--font-mono)",
               fontSize: '0.78rem',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              color: '#020b14',
+              color: 'var(--color-bg-deep)',
               fontWeight: 700,
               textDecoration: 'none',
-              background: 'linear-gradient(135deg, #00ffe7, #00b8a9)',
-              boxShadow: '0 0 20px rgba(0,255,231,0.35)',
+              background: 'linear-gradient(135deg, var(--color-primary), #00b8a9)',
+              boxShadow: '0 0 20px var(--color-primary-glow)',
               display: 'flex', alignItems: 'center', gap: '6px',
               transition: 'all 0.3s ease',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.boxShadow = '0 0 35px rgba(0,255,231,0.55)';
-              e.currentTarget.style.transform = 'translateY(-1px)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.boxShadow = '0 0 20px rgba(0,255,231,0.35)';
-              e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
             <Zap size={13} /> Hire Me
