@@ -35,9 +35,6 @@ export default function App() {
         <Navbar />
         <main>
           <Hero />
-          <div className="divider-glow" />
-          <Engineering />
-          <div className="divider-glow" />
           <ProjectGrid onOpenDetails={setSelectedProject} />
           <div className="divider-glow" />
           <Skills />

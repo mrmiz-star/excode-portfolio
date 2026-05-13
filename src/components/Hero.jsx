@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowDown, Terminal, Cpu, Zap, Activity, ShieldCheck, Server } from 'lucide-react';
+import { ArrowDown, Terminal, Zap } from 'lucide-react';
 import { identity } from '../config/identity';
 
 const TYPED_STRINGS = [
-  'Systems Engineer',
+  'Systems Developer',
   'Automation Builder',
-  'Infrastructure-Focused Developer'
+  'Web & C++ Developer'
 ];
 
 function useTyped(strings, speed = 80, pause = 2000) {
@@ -44,34 +44,6 @@ function useTyped(strings, speed = 80, pause = 2000) {
   return text;
 }
 
-function TelemetryPill({ label, value, icon: Icon, color = 'var(--color-primary)' }) {
-  return (
-    <div style={{
-      padding: '12px 20px', 
-      background: 'rgba(255,255,255,0.02)', 
-      border: '1px solid rgba(255,255,255,0.05)',
-      borderRadius: '8px', 
-      display: 'flex', 
-      alignItems: 'center', 
-      gap: '12px',
-      flex: '1',
-      minWidth: '140px'
-    }}>
-      <div style={{ 
-        width: '32px', height: '32px', borderRadius: '6px', 
-        background: `${color}10`, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        border: `1px solid ${color}20`
-      }}>
-         <Icon size={14} color={color} />
-      </div>
-      <div>
-         <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-mono)', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{label}</div>
-         <div style={{ fontSize: '1rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-mono)' }}>{value}</div>
-      </div>
-    </div>
-  );
-}
-
 export default function Hero() {
   const typedText = useTyped(TYPED_STRINGS);
   const canvasRef = useRef(null);
@@ -86,11 +58,11 @@ export default function Hero() {
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      particles = Array.from({length: 30}, () => ({
+      particles = Array.from({length: 40}, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         s: Math.random() * 0.8 + 0.2,
-        o: Math.random() * 0.3 + 0.05
+        o: Math.random() * 0.2 + 0.05
       }));
     };
     
@@ -124,12 +96,12 @@ export default function Hero() {
       overflow: 'hidden',
       padding: '40px 20px'
     }}>
-      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, opacity: 0.2, pointerEvents: 'none' }} />
+      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, opacity: 0.25, pointerEvents: 'none' }} />
       
       <div style={{ 
         position: 'relative', 
         zIndex: 10, 
-        maxWidth: '1000px', 
+        maxWidth: '1100px', 
         width: '100%', 
         textAlign: 'center',
         display: 'flex',
@@ -137,114 +109,82 @@ export default function Hero() {
         alignItems: 'center'
       }}>
         
-        {/* Top Status Header */}
-        <div className="animate-fadeInUp" style={{ marginBottom: '40px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
-             <span style={{ 
-               padding: '4px 12px', borderRadius: '4px', background: 'rgba(0, 229, 255, 0.03)', 
-               border: '1px solid rgba(0, 229, 255, 0.1)', color: 'rgba(0, 229, 255, 0.6)', 
-               fontSize: '0.6rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em' 
-             }}>
-               {identity.version}
-             </span>
-             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#39ff14', boxShadow: '0 0 10px #39ff14', animation: 'pulse-soft 2s infinite' }} />
-                <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.65rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>SYSTEM_OPERATIONAL</span>
-             </div>
-          </div>
-        </div>
-
-        {/* Main Branding: MIZ FIRST */}
-        <div className="animate-fadeInUp" style={{ marginBottom: '24px', width: '100%' }}>
+        {/* Main Branding: MIZ */}
+        <div style={{ marginBottom: '20px', width: '100%' }}>
           <h1 style={{ 
-            fontSize: 'clamp(3rem, 15vw, 10rem)', 
+            fontSize: 'clamp(4rem, 16vw, 10rem)', 
             fontWeight: 950, 
-            letterSpacing: '-0.05em', 
-            lineHeight: 0.8, 
-            color: '#fff',
+            letterSpacing: '-0.06em', 
+            lineHeight: 0.85, 
+            color: 'var(--color-primary)',
             margin: 0,
-            textShadow: '0 0 40px rgba(255,255,255,0.03)',
-            wordBreak: 'break-word'
+            textShadow: '0 0 30px var(--color-primary-glow)',
+            wordBreak: 'break-word',
+            animation: 'fadeIn 0.5s ease-out'
           }}>
             {identity.developerName}
           </h1>
         </div>
 
         {/* Subtitle / Role (TYPED ANIMATION) */}
-        <div className="animate-fadeInUp" style={{ marginBottom: '32px', minHeight: '1.5em', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ marginBottom: '24px', minHeight: '1.5em', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
            <h2 style={{ 
-             fontSize: 'clamp(1rem, 2.8vw, 1.4rem)', 
-             fontWeight: 600, 
-             color: 'var(--color-primary)', 
+             fontSize: 'clamp(1rem, 2.5vw, 1.4rem)', 
+             fontWeight: 700, 
+             color: '#fff', 
              letterSpacing: '0.05em',
              opacity: 0.9,
-             fontFamily: 'var(--font-mono)',
+             fontFamily: 'var(--font-sans)',
              textTransform: 'uppercase'
            }}>
-             {'>'} {typedText}
+             {typedText}
              <span style={{ 
-               display: 'inline-block', width: '2px', height: '1.1em', background: 'var(--color-primary)', 
-               marginLeft: '4px', verticalAlign: 'middle', animation: 'pulse-soft 0.8s infinite' 
+               display: 'inline-block', width: '3px', height: '1.1em', background: 'var(--color-primary)', 
+               marginLeft: '6px', verticalAlign: 'middle', animation: 'pulse-glow 0.8s infinite' 
              }} />
            </h2>
         </div>
 
-        {/* Operational Description */}
-        <p className="animate-fadeInUp" style={{ 
+        {/* Supporting Line: Simple & Human */}
+        <p style={{ 
           fontSize: 'clamp(1rem, 2vw, 1.15rem)', 
           color: 'var(--color-text-dim)', 
-          maxWidth: '640px', 
+          maxWidth: '540px', 
           lineHeight: 1.6, 
           marginBottom: '48px',
           fontWeight: 400
         }}>
-          {identity.supportingLine}
+          Building projects in web, systems, AI tools, and automation.
         </p>
 
         {/* CTA Actions */}
-        <div className="animate-fadeInUp" style={{ 
+        <div style={{ 
           display: 'flex', 
           gap: '16px', 
           justifyContent: 'center', 
           flexWrap: 'wrap', 
-          marginBottom: '64px',
           width: '100%'
         }}>
            <a href="#projects" style={{
-             padding: '16px 40px', borderRadius: '4px', background: 'var(--color-primary)', color: 'var(--color-bg-deep)',
-             fontSize: '0.8rem', fontWeight: 900, textDecoration: 'none', fontFamily: 'var(--font-mono)',
-             letterSpacing: '0.12em', display: 'flex', alignItems: 'center', gap: '12px', transition: 'all 0.3s ease'
+             padding: '18px 48px', borderRadius: '4px', background: 'var(--color-primary)', color: 'var(--color-bg-deep)',
+             fontSize: '0.9rem', fontWeight: 900, textDecoration: 'none', fontFamily: 'var(--font-mono)',
+             letterSpacing: '0.1em', display: 'flex', alignItems: 'center', gap: '12px', transition: 'all 0.3s ease'
            }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 5px 20px rgba(0, 229, 255, 0.3)'; }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 229, 255, 0.2)'; }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
            >
-             <Zap size={16} /> VIEW_ECOSYSTEM
+             VIEW PROJECTS
            </a>
            <a href="#contact" style={{
-             padding: '16px 40px', borderRadius: '4px', background: 'rgba(255,255,255,0.02)', color: '#fff',
-             fontSize: '0.8rem', fontWeight: 600, textDecoration: 'none', fontFamily: 'var(--font-mono)',
-             letterSpacing: '0.12em', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid rgba(255,255,255,0.08)', transition: 'all 0.3s ease'
+             padding: '18px 48px', borderRadius: '4px', background: 'rgba(255,255,255,0.02)', color: '#fff',
+             fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none', fontFamily: 'var(--font-mono)',
+             letterSpacing: '0.1em', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid rgba(255,255,255,0.08)', transition: 'all 0.3s ease'
            }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; }}
             onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; }}
            >
-             <Terminal size={16} /> CONTACT_ROOT
+             GET IN TOUCH
            </a>
-        </div>
-
-        {/* Telemetry Widgets */}
-        <div className="animate-fadeInUp" style={{ 
-          display: 'flex', 
-          gap: '16px', 
-          justifyContent: 'center', 
-          flexWrap: 'wrap',
-          width: '100%',
-          maxWidth: '800px'
-        }}>
-           <TelemetryPill label="Infrastructure" value="Modular" icon={Server} />
-           <TelemetryPill label="Active Systems" value="18+" icon={Cpu} color="var(--color-secondary)" />
-           <TelemetryPill label="Security" value="Hardened" icon={ShieldCheck} color="var(--color-accent)" />
-           <TelemetryPill label="State" value="Stable" icon={Activity} color="#00aaff" />
         </div>
 
       </div>
@@ -252,14 +192,14 @@ export default function Hero() {
       {/* Scroll Hint */}
       <a href="#projects" style={{
         position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)',
-        color: 'rgba(255,255,255,0.15)', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px',
+        color: 'rgba(255,255,255,0.15)', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px',
         transition: 'all 0.3s'
       }}
-        onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+        onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.3)'}
         onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.15)'}
       >
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', letterSpacing: '0.25em' }}>DATA_STREAM_SCROLL</span>
-        <ArrowDown size={14} />
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', letterSpacing: '0.3em' }}>SCROLL</span>
+        <ArrowDown size={14} className="animate-bounce" />
       </a>
     </section>
   );

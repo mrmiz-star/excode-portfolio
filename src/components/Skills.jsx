@@ -1,7 +1,7 @@
 import React from 'react';
 import { skillGroups } from '../data/projects';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Terminal, Shield, Cpu, Activity } from 'lucide-react';
+import { Terminal, Shield, Cpu, Zap } from 'lucide-react';
 
 export default function Skills() {
   const [ref, isVisible] = useScrollReveal();
@@ -21,83 +21,92 @@ export default function Skills() {
             Technical <span style={{ color: 'var(--color-primary)', textShadow: '0 0 30px var(--color-primary-glow)' }}>Arsenal</span>
           </h2>
           <p style={{
-            color: 'var(--color-text-dim)', maxWidth: '440px',
+            color: 'var(--color-text-dim)', maxWidth: '500px',
             margin: '0 auto', fontSize: '1.05rem', lineHeight: 1.7,
           }}>
-            Categorized by engineering domains and system capabilities.
+            A professional stack focused on performance, automation, and systems architecture.
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '32px' }}>
           {skillGroups.map((group, gi) => (
             <div key={group.label} className="glass-card" style={{ 
-              padding: '48px 40px', borderRadius: '24px', 
+              padding: '48px 40px', borderRadius: '12px', 
               border: `1px solid ${group.color}20`,
-              background: `linear-gradient(135deg, rgba(3, 8, 15, 0.9), ${group.color}05)`
+              background: `linear-gradient(135deg, rgba(3, 8, 15, 0.95), ${group.color}05)`,
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100%'
             }}>
               
               {/* Group Label */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '40px' }}>
                  <div style={{ 
-                   width: '42px', height: '42px', borderRadius: '10px', 
+                   width: '42px', height: '42px', borderRadius: '8px', 
                    background: `${group.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center',
                    border: `1px solid ${group.color}30`
                  }}>
-                    {gi === 0 ? <Shield size={20} color={group.color} /> : <Cpu size={20} color={group.color} />}
+                    {gi === 0 ? <Cpu size={20} color={group.color} /> : 
+                     gi === 1 ? <Zap size={20} color={group.color} /> : 
+                     <Shield size={20} color={group.color} />}
                  </div>
                  <h3 style={{ 
-                   fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: group.color, 
-                   letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 800 
+                   fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: '#fff', 
+                   letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 800 
                  }}>
                    {group.label}
                  </h3>
               </div>
 
-              {/* Engineering Domains */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '48px' }}>
-                 {group.domains && group.domains.map((domain, di) => (
-                   <div key={di} style={{ 
-                     padding: '20px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)',
-                     border: '1px solid rgba(255,255,255,0.05)', transition: 'all 0.3s ease'
-                   }}
-                    onMouseEnter={e => { e.currentTarget.style.borderColor = group.color + '40'; e.currentTarget.style.background = group.color + '05'; }}
-                    onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; }}
-                   >
-                      <div style={{ color: '#fff', fontWeight: 700, fontSize: '0.95rem', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                         <Terminal size={14} color={group.color} /> {domain.name}
-                      </div>
-                      <div style={{ color: 'var(--color-text-dim)', fontSize: '0.8rem', lineHeight: 1.5 }}>
-                         {domain.details}
-                      </div>
-                   </div>
-                 ))}
+              {/* Skills Grid */}
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', 
+                gap: '12px',
+                marginTop: 'auto'
+              }}>
+                {group.skills.map((skill, si) => (
+                  <div key={si} style={{ 
+                    padding: '12px 16px',
+                    borderRadius: '6px',
+                    background: 'rgba(255,255,255,0.02)',
+                    border: '1px solid rgba(255,255,255,0.05)',
+                    color: 'rgba(255,255,255,0.7)',
+                    fontSize: '0.85rem',
+                    fontFamily: 'var(--font-mono)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = group.color + '40';
+                    e.currentTarget.style.background = group.color + '10';
+                    e.currentTarget.style.color = '#fff';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.02)';
+                    e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
+                  }}
+                  >
+                    <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: group.color }} />
+                    {skill}
+                  </div>
+                ))}
               </div>
 
-              {/* Core Technologies (Skill Bars) */}
-              <div>
-                 <h4 style={{ 
-                   fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'rgba(255,255,255,0.3)', 
-                   letterSpacing: '0.1em', marginBottom: '20px', textTransform: 'uppercase'
-                 }}>
-                   CORE STACK TELEMETRY
-                 </h4>
-                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-                    {group.skills.map((skill, si) => (
-                      <div key={si}>
-                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                            <span style={{ fontSize: '0.75rem', color: '#fff', fontWeight: 600 }}>{skill.name}</span>
-                            <span style={{ fontSize: '0.75rem', color: group.color, fontFamily: 'var(--font-mono)' }}>{skill.level}%</span>
-                         </div>
-                         <div style={{ height: '3px', background: 'rgba(255,255,255,0.05)', borderRadius: '2px', overflow: 'hidden' }}>
-                            <div style={{ 
-                              height: '100%', background: group.color, width: isVisible ? `${skill.level}%` : '0%',
-                              transition: `width 1.5s cubic-bezier(0.23, 1, 0.32, 1) ${si * 0.1}s`,
-                              boxShadow: `0 0 10px ${group.color}80`
-                            }} />
-                         </div>
-                      </div>
-                    ))}
-                 </div>
+              {/* Subtle Tagline */}
+              <div style={{ 
+                marginTop: '32px', 
+                paddingTop: '24px', 
+                borderTop: '1px solid rgba(255,255,255,0.05)',
+                fontSize: '0.65rem',
+                fontFamily: 'var(--font-mono)',
+                color: 'rgba(255,255,255,0.2)',
+                letterSpacing: '0.1em'
+              }}>
+                {group.label.toUpperCase()} // DOMAIN_VERIFIED
               </div>
 
             </div>

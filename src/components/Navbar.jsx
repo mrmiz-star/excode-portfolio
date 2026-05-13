@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Terminal, Activity } from 'lucide-react';
+import { Menu, X, Terminal, MessageSquare } from 'lucide-react';
 import { identity } from '../config/identity';
 
 const navLinks = [
   { label: 'HOME', href: '#home' },
   { label: 'PROJECTS', href: '#projects' },
   { label: 'SKILLS', href: '#skills' },
-  { label: 'ENGINEERING', href: '#engineering' },
+  { label: 'FOCUS', href: '#focus' },
   { label: 'CONTACT', href: '#contact' },
 ];
 
@@ -26,51 +26,40 @@ export default function Navbar() {
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
         transition: 'all 0.3s ease',
-        background: scrolled ? 'rgba(2, 6, 12, 0.95)' : 'transparent',
+        background: scrolled ? 'rgba(3, 8, 15, 0.95)' : 'transparent',
         backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(0, 229, 255, 0.1)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(255, 255, 255, 0.05)' : 'none',
       }}
     >
       <nav style={{
         maxWidth: '1280px', margin: '0 auto',
-        padding: '0 16px',
+        padding: '0 24px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         height: '72px',
       }}>
         {/* Brand: MIZ FIRST */}
-        <a href="#home" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <a href="#home" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{
-            width: '28px', height: '28px', borderRadius: '4px',
+            width: '32px', height: '32px', borderRadius: '6px',
             background: 'rgba(0, 229, 255, 0.05)',
             border: '1px solid rgba(0, 229, 255, 0.2)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             flexShrink: 0
           }}>
-            <Terminal size={12} color="var(--color-primary)" />
+            <Terminal size={14} color="var(--color-primary)" />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: '1rem',
-              fontWeight: 950,
-              color: '#fff',
-              letterSpacing: '0.02em',
-              lineHeight: 1,
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis'
+              fontFamily: "var(--font-mono)", fontSize: '1.1rem', fontWeight: 950, color: '#fff',
+              letterSpacing: '0.02em', lineHeight: 1
             }}>
               MIZ
             </span>
             <span style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: '0.5rem',
-              color: 'rgba(0, 229, 255, 0.6)',
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              whiteSpace: 'nowrap'
+              fontFamily: "var(--font-mono)", fontSize: '0.55rem', color: 'rgba(255, 255, 255, 0.3)',
+              letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '2px'
             }}>
-              EX CODE ECOSYSTEM
+              EX CODE SIGNATURE
             </span>
           </div>
         </a>
@@ -114,23 +103,23 @@ export default function Navbar() {
           <a
             href="#contact"
             style={{
-              padding: '8px 20px',
-              borderRadius: '6px',
+              padding: '10px 24px',
+              borderRadius: '4px',
               fontFamily: "var(--font-mono)",
               fontSize: '0.7rem',
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
               color: 'var(--color-bg-deep)',
-              fontWeight: 800,
+              fontWeight: 900,
               textDecoration: 'none',
               background: 'var(--color-primary)',
               display: 'flex', alignItems: 'center', gap: '8px',
               transition: 'all 0.3s ease',
             }}
-            onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 229, 255, 0.4)'}
+            onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 229, 255, 0.3)'}
             onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
           >
-            <Activity size={12} /> STATUS: LIVE
+            <MessageSquare size={14} /> LET'S TALK
           </a>
         </div>
 
@@ -139,8 +128,8 @@ export default function Navbar() {
           onClick={() => setOpen(!open)}
           style={{
             display: 'none',
-            background: 'rgba(0, 229, 255, 0.05)',
-            border: '1px solid rgba(0, 229, 255, 0.1)',
+            background: 'rgba(255, 255, 255, 0.02)',
+            border: '1px solid rgba(255, 255, 255, 0.05)',
             borderRadius: '6px',
             padding: '8px',
             cursor: 'pointer',
@@ -155,10 +144,10 @@ export default function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div style={{
-          background: 'rgba(2, 6, 12, 0.98)',
-          borderTop: '1px solid rgba(0, 229, 255, 0.1)',
+          background: 'rgba(3, 8, 15, 0.98)',
+          borderTop: '1px solid rgba(255, 255, 255, 0.05)',
           padding: '24px',
-          display: 'flex', flexDirection: 'column', gap: '8px',
+          display: 'flex', flexDirection: 'column', gap: '4px',
         }}>
           {navLinks.map(link => (
             <a
@@ -168,11 +157,11 @@ export default function Navbar() {
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: '0.8rem',
-                letterSpacing: '0.1em',
+                letterSpacing: '0.15em',
                 textTransform: 'uppercase',
                 color: 'rgba(255, 255, 255, 0.6)',
                 textDecoration: 'none',
-                padding: '12px 16px',
+                padding: '16px',
                 borderRadius: '8px',
                 transition: 'all 0.2s ease',
               }}
@@ -184,7 +173,7 @@ export default function Navbar() {
       )}
 
       <style>{`
-        @media (max-width: 850px) {
+        @media (max-width: 950px) {
           .desktop-nav { display: none !important; }
           .mobile-menu-btn { display: flex !important; }
         }
