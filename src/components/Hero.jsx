@@ -1,18 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowDown, Terminal, Cpu, Wifi, Zap } from 'lucide-react';
+import { ArrowDown, Terminal, Cpu, Zap, Activity, ShieldCheck, Server } from 'lucide-react';
 import { identity } from '../config/identity';
 
 const TYPED_STRINGS = [
   'Systems Engineer',
-  'Backend Architect',
-  'Security Researcher',
-  'Automation Specialist',
-  'C++ Developer',
-  'AI Tooling Engineer',
-  'Optimization Expert'
+  'Automation Builder',
+  'Infrastructure-Focused Developer'
 ];
 
-function useTyped(strings, speed = 80, pause = 1800) {
+function useTyped(strings, speed = 80, pause = 2000) {
   const [text, setText] = useState('');
   const [idx, setIdx] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -48,71 +44,30 @@ function useTyped(strings, speed = 80, pause = 1800) {
   return text;
 }
 
-function StatBadge({ icon: Icon, label, value, color = 'var(--color-primary)' }) {
+function TelemetryPill({ label, value, icon: Icon, color = 'var(--color-primary)' }) {
   return (
     <div style={{
-      display:'flex',flexDirection:'column',gap:'6px',padding:'18px 24px',
-      background:'var(--color-bg-card)',border:`1px solid var(--color-border-dim)`,borderRadius:'16px',
-      backdropFilter:'blur(20px)',minWidth:'120px',transition:'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)',cursor:'default',
-      boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
-    }}
-      onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--color-border-bright)';e.currentTarget.style.boxShadow=`0 0 30px ${color}20`;e.currentTarget.style.transform='translateY(-4px)';}}
-      onMouseLeave={e=>{e.currentTarget.style.borderColor='var(--color-border-dim)';e.currentTarget.style.boxShadow='0 4px 12px rgba(0,0,0,0.2)';e.currentTarget.style.transform='translateY(0)';}}
-    >
-      <Icon size={18} color={color} style={{opacity:0.9}}/>
-      <span style={{fontSize:'1.6rem',fontWeight:800,color,fontFamily:"var(--font-mono)",lineHeight:1,marginTop:'4px'}}>{value}</span>
-      <span style={{fontSize:'0.65rem',color:'var(--color-text-dim)',letterSpacing:'0.1em',textTransform:'uppercase',fontWeight:600}}>{label}</span>
-    </div>
-  );
-}
-
-function BootLogs() {
-  const [logs, setLogs] = useState([]);
-  const allLogs = [
-    'Initializing Systems...',
-    'Loading Kernel Modules...',
-    'Establishing Secure Link...',
-    'Scanning Network Assets...',
-    'Compiling Asset Manifest...',
-    'Optimizing Render Engine...',
-    'Handshaking with API...',
-    'System Ready.'
-  ];
-
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < allLogs.length) {
-        setLogs(prev => [...prev, allLogs[i]]);
-        i++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 400);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div style={{
-      position: 'absolute', bottom: '40px', right: '40px',
-      width: '240px', padding: '12px',
-      background: 'rgba(6,22,38,0.6)', border: '1px solid rgba(0,255,231,0.1)',
-      borderRadius: '8px', backdropFilter: 'blur(8px)',
-      fontFamily: "'Share Tech Mono', monospace", fontSize: '0.65rem',
-      color: 'rgba(0,255,231,0.5)', textAlign: 'left',
-      zIndex: 5, pointerEvents: 'none'
-    }} className="hero-boot-logs animate-fadeIn delay-700">
-      <div style={{ marginBottom: '6px', opacity: 0.3, fontSize: '0.55rem' }}>TERMINAL_BOOT_LOG_V2.01</div>
-      {logs.map((log, i) => (
-        <div key={i} style={{ marginBottom: '2px' }}>
-          <span style={{ color: '#00ffe7', opacity: 0.8 }}>[OK]</span> {log}
-        </div>
-      ))}
-      {logs.length === allLogs.length && (
-        <div style={{ marginTop: '4px', color: 'var(--color-accent)', animation: 'flicker 2s infinite' }}>
-          {'>'} LISTENING_FOR_INPUT
-        </div>
-      )}
+      padding: '12px 20px', 
+      background: 'rgba(255,255,255,0.02)', 
+      border: '1px solid rgba(255,255,255,0.05)',
+      borderRadius: '8px', 
+      display: 'flex', 
+      alignItems: 'center', 
+      gap: '12px',
+      flex: '1',
+      minWidth: '140px'
+    }}>
+      <div style={{ 
+        width: '32px', height: '32px', borderRadius: '6px', 
+        background: `${color}10`, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        border: `1px solid ${color}20`
+      }}>
+         <Icon size={14} color={color} />
+      </div>
+      <div>
+         <div style={{ fontSize: '0.6rem', fontFamily: 'var(--font-mono)', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{label}</div>
+         <div style={{ fontSize: '1rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-mono)' }}>{value}</div>
+      </div>
     </div>
   );
 }
@@ -126,135 +81,185 @@ export default function Hero() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let animId;
-    let nodes = [];
+    let particles = [];
+    
     const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      nodes = Array.from({length:40}, () => ({
-        x:Math.random()*canvas.width, y:Math.random()*canvas.height,
-        vx:(Math.random()-0.5)*0.4, vy:(Math.random()-0.5)*0.4, r:Math.random()*2+1,
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      particles = Array.from({length: 30}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        s: Math.random() * 0.8 + 0.2,
+        o: Math.random() * 0.3 + 0.05
       }));
     };
+    
     resize();
     window.addEventListener('resize', resize);
+    
     const draw = () => {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      nodes.forEach(n => {
-        n.x+=n.vx; n.y+=n.vy;
-        if(n.x<0||n.x>canvas.width) n.vx*=-1;
-        if(n.y<0||n.y>canvas.height) n.vy*=-1;
-        ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-        ctx.fillStyle='rgba(0,255,231,0.5)'; ctx.fill();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00e5ff';
+      particles.forEach(p => {
+        p.y -= p.s * 0.3;
+        if (p.y < 0) p.y = canvas.height;
+        ctx.globalAlpha = p.o;
+        ctx.fillRect(p.x, p.y, 1, 1);
       });
-      for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++) {
-        const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
-        const dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<140){
-          ctx.beginPath(); ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y);
-          ctx.strokeStyle=`rgba(0,255,231,${0.15*(1-dist/140)})`; ctx.lineWidth=0.7; ctx.stroke();
-        }
-      }
-      animId=requestAnimationFrame(draw);
+      animId = requestAnimationFrame(draw);
     };
+    
     draw();
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize',resize); };
+    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
   }, []);
 
   return (
     <section id="home" style={{
-      position:'relative',minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',
-      overflow:'hidden',background:'radial-gradient(circle at 50% 50%, #0a111a 0%, #050a0f 100%)',
+      position: 'relative', 
+      minHeight: '100vh', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      background: 'var(--color-bg-deep)', 
+      overflow: 'hidden',
+      padding: '40px 20px'
     }}>
-      <canvas ref={canvasRef} style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0.6}}/>
-      <div style={{position:'absolute',top:'40%',left:'50%',transform:'translate(-50%,-50%)',width:'600px',height:'600px',
-        background:'radial-gradient(circle,rgba(0,255,231,0.07) 0%,transparent 70%)',pointerEvents:'none'}}/>
-      <div className="cyber-grid" style={{position:'absolute',inset:0,opacity:0.3}}/>
-
-      <div style={{position:'relative',zIndex:10,textAlign:'center',padding:'120px 24px 80px',maxWidth:'900px',margin:'0 auto'}}>
-        {/* Status badge */}
-        <div className="animate-fadeInUp" style={{marginBottom:'28px'}}>
-          <span style={{
-            display:'inline-flex',alignItems:'center',gap:'8px',padding:'6px 18px',
-            border:'1px solid rgba(0,255,231,0.3)',borderRadius:'20px',
-            fontFamily:"'Share Tech Mono',monospace",fontSize:'0.72rem',letterSpacing:'0.2em',
-            textTransform:'uppercase',color:'#00ffe7',background:'rgba(0,255,231,0.05)',
-          }}>
-            <span style={{width:'6px',height:'6px',borderRadius:'50%',background:'#39ff14',
-              boxShadow:'0 0 8px #39ff14',animation:'glow-pulse 1.5s ease-in-out infinite',display:'inline-block'}}/>
-            STATUS: BUILDING DAILY — 2026
-          </span>
+      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, opacity: 0.2, pointerEvents: 'none' }} />
+      
+      <div style={{ 
+        position: 'relative', 
+        zIndex: 10, 
+        maxWidth: '1000px', 
+        width: '100%', 
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}>
+        
+        {/* Top Status Header */}
+        <div className="animate-fadeInUp" style={{ marginBottom: '40px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
+             <span style={{ 
+               padding: '4px 12px', borderRadius: '4px', background: 'rgba(0, 229, 255, 0.03)', 
+               border: '1px solid rgba(0, 229, 255, 0.1)', color: 'rgba(0, 229, 255, 0.6)', 
+               fontSize: '0.6rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em' 
+             }}>
+               {identity.version}
+             </span>
+             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#39ff14', boxShadow: '0 0 10px #39ff14', animation: 'pulse-soft 2s infinite' }} />
+                <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.65rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>SYSTEM_OPERATIONAL</span>
+             </div>
+          </div>
         </div>
 
-        {/* Name */}
-        <h1 className="animate-fadeInUp delay-100" style={{fontSize:'clamp(3.5rem,10vw,8rem)',fontWeight:900,lineHeight:0.9,marginBottom:'16px',letterSpacing:'-0.03em'}}>
-          <span style={{
-            color:'var(--color-primary)',
-            display:'block',
-            textShadow:'0 0 40px var(--color-primary-glow)',
-            animation:'glow-pulse 3s ease-in-out infinite',
-            background: 'linear-gradient(to bottom, #fff 0%, var(--color-primary) 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            filter: 'drop-shadow(0 0 20px var(--color-primary-glow))'
+        {/* Main Branding: MIZ FIRST */}
+        <div className="animate-fadeInUp" style={{ marginBottom: '24px', width: '100%' }}>
+          <h1 style={{ 
+            fontSize: 'clamp(3rem, 15vw, 10rem)', 
+            fontWeight: 950, 
+            letterSpacing: '-0.05em', 
+            lineHeight: 0.8, 
+            color: '#fff',
+            margin: 0,
+            textShadow: '0 0 40px rgba(255,255,255,0.03)',
+            wordBreak: 'break-word'
           }}>
             {identity.developerName}
-          </span>
-        </h1>
-
-        {/* Typed */}
-        <div className="animate-fadeInUp delay-200" style={{height:'42px',marginBottom:'24px',display:'flex',alignItems:'center',justifyContent:'center'}}>
-          <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:'clamp(1rem,2.5vw,1.35rem)',color:'rgba(200,216,232,0.75)',letterSpacing:'0.05em'}}>
-            {'>'}&nbsp;<span style={{color:'#00ffe7'}}>{typedText}</span>
-            <span style={{display:'inline-block',width:'2px',height:'1.2em',background:'#00ffe7',marginLeft:'2px',verticalAlign:'middle',animation:'blink-cursor 0.8s ease-in-out infinite'}}/>
-          </span>
+          </h1>
         </div>
 
-        {/* Tagline */}
-        <p className="animate-fadeInUp delay-300" style={{fontSize:'1.05rem',color:'var(--color-text-dim)',maxWidth:'540px',margin:'0 auto 48px',lineHeight:1.7,fontWeight:300}}>
-          {identity.tagline}.<br/>
-          I engineer production-grade tools — from kernel-level C++ to hardened backend APIs.
-          Security, performance, and real delivery. Shipped, not just planned.
+        {/* Subtitle / Role (TYPED ANIMATION) */}
+        <div className="animate-fadeInUp" style={{ marginBottom: '32px', minHeight: '1.5em', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+           <h2 style={{ 
+             fontSize: 'clamp(1rem, 2.8vw, 1.4rem)', 
+             fontWeight: 600, 
+             color: 'var(--color-primary)', 
+             letterSpacing: '0.05em',
+             opacity: 0.9,
+             fontFamily: 'var(--font-mono)',
+             textTransform: 'uppercase'
+           }}>
+             {'>'} {typedText}
+             <span style={{ 
+               display: 'inline-block', width: '2px', height: '1.1em', background: 'var(--color-primary)', 
+               marginLeft: '4px', verticalAlign: 'middle', animation: 'pulse-soft 0.8s infinite' 
+             }} />
+           </h2>
+        </div>
+
+        {/* Operational Description */}
+        <p className="animate-fadeInUp" style={{ 
+          fontSize: 'clamp(1rem, 2vw, 1.15rem)', 
+          color: 'var(--color-text-dim)', 
+          maxWidth: '640px', 
+          lineHeight: 1.6, 
+          marginBottom: '48px',
+          fontWeight: 400
+        }}>
+          {identity.supportingLine}
         </p>
 
-        {/* CTAs */}
-        <div className="animate-fadeInUp delay-400" style={{display:'flex',gap:'16px',justifyContent:'center',flexWrap:'wrap',marginBottom:'72px'}}>
-          <a href="#projects" className="btn-neon-solid" style={{
-            padding:'14px 32px',borderRadius:'10px',fontFamily:"'Share Tech Mono',monospace",fontSize:'0.85rem',
-            letterSpacing:'0.08em',textTransform:'uppercase',textDecoration:'none',
-            display:'inline-flex',alignItems:'center',gap:'8px'
-          }}>
-            <Zap size={16}/> View Projects
-          </a>
-          <a href="#contact" className="btn-neon" style={{
-            padding:'14px 32px',borderRadius:'10px',fontFamily:"'Share Tech Mono',monospace",fontSize:'0.85rem',
-            letterSpacing:'0.08em',textTransform:'uppercase',textDecoration:'none',
-            display:'inline-flex',alignItems:'center',gap:'8px'
-          }}>
-            <Terminal size={16}/> Contact
-          </a>
+        {/* CTA Actions */}
+        <div className="animate-fadeInUp" style={{ 
+          display: 'flex', 
+          gap: '16px', 
+          justifyContent: 'center', 
+          flexWrap: 'wrap', 
+          marginBottom: '64px',
+          width: '100%'
+        }}>
+           <a href="#projects" style={{
+             padding: '16px 40px', borderRadius: '4px', background: 'var(--color-primary)', color: 'var(--color-bg-deep)',
+             fontSize: '0.8rem', fontWeight: 900, textDecoration: 'none', fontFamily: 'var(--font-mono)',
+             letterSpacing: '0.12em', display: 'flex', alignItems: 'center', gap: '12px', transition: 'all 0.3s ease'
+           }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 5px 20px rgba(0, 229, 255, 0.3)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
+           >
+             <Zap size={16} /> VIEW_ECOSYSTEM
+           </a>
+           <a href="#contact" style={{
+             padding: '16px 40px', borderRadius: '4px', background: 'rgba(255,255,255,0.02)', color: '#fff',
+             fontSize: '0.8rem', fontWeight: 600, textDecoration: 'none', fontFamily: 'var(--font-mono)',
+             letterSpacing: '0.12em', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid rgba(255,255,255,0.08)', transition: 'all 0.3s ease'
+           }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; }}
+           >
+             <Terminal size={16} /> CONTACT_ROOT
+           </a>
         </div>
 
-        {/* Stats */}
-        <div className="animate-fadeInUp delay-500" style={{display:'flex',gap:'16px',justifyContent:'center',flexWrap:'wrap'}}>
-          <StatBadge icon={Terminal} label="Projects" value="6+" color="var(--color-primary)"/>
-          <StatBadge icon={Cpu} label="Stack" value="12+" color="var(--color-secondary)"/>
-          <StatBadge icon={Zap} label="Uptime" value="99.9%" color="var(--color-accent)"/>
-          <StatBadge icon={Wifi} label="Network" value="LIVE" color="#00aaff"/>
+        {/* Telemetry Widgets */}
+        <div className="animate-fadeInUp" style={{ 
+          display: 'flex', 
+          gap: '16px', 
+          justifyContent: 'center', 
+          flexWrap: 'wrap',
+          width: '100%',
+          maxWidth: '800px'
+        }}>
+           <TelemetryPill label="Infrastructure" value="Modular" icon={Server} />
+           <TelemetryPill label="Active Systems" value="18+" icon={Cpu} color="var(--color-secondary)" />
+           <TelemetryPill label="Security" value="Hardened" icon={ShieldCheck} color="var(--color-accent)" />
+           <TelemetryPill label="State" value="Stable" icon={Activity} color="#00aaff" />
         </div>
+
       </div>
 
-      <BootLogs />
-
+      {/* Scroll Hint */}
       <a href="#projects" style={{
-        position:'absolute',bottom:'32px',left:'50%',transform:'translateX(-50%)',
-        display:'flex',flexDirection:'column',alignItems:'center',gap:'6px',
-        color:'rgba(0,255,231,0.4)',textDecoration:'none',animation:'float 2.5s ease-in-out infinite',transition:'color 0.3s ease',
+        position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)',
+        color: 'rgba(255,255,255,0.15)', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px',
+        transition: 'all 0.3s'
       }}
-        onMouseEnter={e=>e.currentTarget.style.color='rgba(0,255,231,0.8)'}
-        onMouseLeave={e=>e.currentTarget.style.color='rgba(0,255,231,0.4)'}
+        onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+        onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.15)'}
       >
-        <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:'0.65rem',letterSpacing:'0.2em',textTransform:'uppercase'}}>Scroll</span>
-        <ArrowDown size={18}/>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', letterSpacing: '0.25em' }}>DATA_STREAM_SCROLL</span>
+        <ArrowDown size={14} />
       </a>
     </section>
   );

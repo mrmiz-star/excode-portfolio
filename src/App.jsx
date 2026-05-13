@@ -30,6 +30,7 @@ export default function App() {
     <>
       <div className="animate-fadeIn">
         <MouseTrail />
+        <div className="operational-bg" />
         <div className="scanline-overlay" />
         <Navbar />
         <main>

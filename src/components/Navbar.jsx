@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Terminal, Zap } from 'lucide-react';
+import { Menu, X, Terminal, Activity } from 'lucide-react';
 import { identity } from '../config/identity';
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'HOME', href: '#home' },
+  { label: 'PROJECTS', href: '#projects' },
+  { label: 'SKILLS', href: '#skills' },
+  { label: 'ENGINEERING', href: '#engineering' },
+  { label: 'CONTACT', href: '#contact' },
 ];
 
 export default function Navbar() {
@@ -25,82 +25,82 @@ export default function Navbar() {
     <header
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-        transition: 'all 0.4s ease',
-        background: scrolled
-          ? 'rgba(5, 10, 15, 0.85)'
-          : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        borderBottom: scrolled ? '1px solid var(--color-border-dim)' : 'none',
-        boxShadow: scrolled ? '0 4px 40px rgba(0,0,0,0.5)' : 'none',
+        transition: 'all 0.3s ease',
+        background: scrolled ? 'rgba(2, 6, 12, 0.95)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(0, 229, 255, 0.1)' : 'none',
       }}
     >
       <nav style={{
         maxWidth: '1280px', margin: '0 auto',
-        padding: '0 24px',
+        padding: '0 16px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        height: '64px',
+        height: '72px',
       }}>
-        {/* Logo */}
-        <a href="#home" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Brand: MIZ FIRST */}
+        <a href="#home" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div style={{
-            width: '36px', height: '36px', borderRadius: '8px',
-            background: 'linear-gradient(135deg, rgba(0,255,231,0.2), rgba(0,255,231,0.05))',
-            border: '1px solid rgba(0,255,231,0.4)',
+            width: '28px', height: '28px', borderRadius: '4px',
+            background: 'rgba(0, 229, 255, 0.05)',
+            border: '1px solid rgba(0, 229, 255, 0.2)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 0 16px rgba(0,255,231,0.2)',
+            flexShrink: 0
           }}>
-            <Terminal size={16} color="#00ffe7" />
+            <Terminal size={12} color="var(--color-primary)" />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
             <span style={{
               fontFamily: "var(--font-mono)",
-              fontSize: '1.2rem',
-              fontWeight: 800,
-              color: 'var(--color-primary)',
-              textShadow: '0 0 12px var(--color-primary-glow)',
-              letterSpacing: '0.05em',
-              lineHeight: 1.1
+              fontSize: '1rem',
+              fontWeight: 950,
+              color: '#fff',
+              letterSpacing: '0.02em',
+              lineHeight: 1,
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
             }}>
-              {identity.developerName}
+              MIZ
             </span>
             <span style={{
               fontFamily: "var(--font-mono)",
-              fontSize: '0.65rem',
-              color: 'var(--color-text-dim)',
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase'
+              fontSize: '0.5rem',
+              color: 'rgba(0, 229, 255, 0.6)',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              whiteSpace: 'nowrap'
             }}>
-              {identity.subText}
+              EX CODE ECOSYSTEM
             </span>
           </div>
         </a>
 
-        {/* Desktop links */}
-        <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }} className="desktop-nav">
+        {/* Navigation Grid */}
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }} className="desktop-nav">
           {navLinks.map(link => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setActive(link.href.replace('#', ''))}
               style={{
-                fontFamily: "'Share Tech Mono', monospace",
-                fontSize: '0.78rem',
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                color: active === link.href.replace('#', '') ? '#00ffe7' : 'rgba(200,216,232,0.65)',
+                fontFamily: "var(--font-mono)",
+                fontSize: '0.7rem',
+                letterSpacing: '0.15em',
+                color: active === link.href.replace('#', '') ? 'var(--color-primary)' : 'rgba(255, 255, 255, 0.4)',
                 textDecoration: 'none',
                 padding: '8px 16px',
-                borderRadius: '6px',
+                borderRadius: '4px',
                 transition: 'all 0.2s ease',
-                background: active === link.href.replace('#', '') ? 'rgba(0,255,231,0.08)' : 'transparent',
+                background: active === link.href.replace('#', '') ? 'rgba(0, 229, 255, 0.05)' : 'transparent',
+                fontWeight: active === link.href.replace('#', '') ? 700 : 500,
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.color = '#00ffe7';
-                e.currentTarget.style.background = 'rgba(0,255,231,0.06)';
+                e.currentTarget.style.color = 'var(--color-primary)';
+                e.currentTarget.style.background = 'rgba(0, 229, 255, 0.03)';
               }}
               onMouseLeave={e => {
                 if (active !== link.href.replace('#', '')) {
-                  e.currentTarget.style.color = 'rgba(200,216,232,0.65)';
+                  e.currentTarget.style.color = 'rgba(255, 255, 255, 0.4)';
                   e.currentTarget.style.background = 'transparent';
                 }
               }}
@@ -108,27 +108,29 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          
+          <div style={{ width: '1px', height: '16px', background: 'rgba(255,255,255,0.1)', margin: '0 12px' }} />
+          
           <a
             href="#contact"
-            className="btn-neon-solid"
             style={{
-              marginLeft: '12px',
               padding: '8px 20px',
-              borderRadius: '10px',
+              borderRadius: '6px',
               fontFamily: "var(--font-mono)",
-              fontSize: '0.78rem',
-              letterSpacing: '0.08em',
+              fontSize: '0.7rem',
+              letterSpacing: '0.1em',
               textTransform: 'uppercase',
               color: 'var(--color-bg-deep)',
-              fontWeight: 700,
+              fontWeight: 800,
               textDecoration: 'none',
-              background: 'linear-gradient(135deg, var(--color-primary), #00b8a9)',
-              boxShadow: '0 0 20px var(--color-primary-glow)',
-              display: 'flex', alignItems: 'center', gap: '6px',
+              background: 'var(--color-primary)',
+              display: 'flex', alignItems: 'center', gap: '8px',
               transition: 'all 0.3s ease',
             }}
+            onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 229, 255, 0.4)'}
+            onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
           >
-            <Zap size={13} /> Hire Me
+            <Activity size={12} /> STATUS: LIVE
           </a>
         </div>
 
@@ -137,15 +139,14 @@ export default function Navbar() {
           onClick={() => setOpen(!open)}
           style={{
             display: 'none',
-            background: 'rgba(0,255,231,0.08)',
-            border: '1px solid rgba(0,255,231,0.2)',
-            borderRadius: '8px',
+            background: 'rgba(0, 229, 255, 0.05)',
+            border: '1px solid rgba(0, 229, 255, 0.1)',
+            borderRadius: '6px',
             padding: '8px',
             cursor: 'pointer',
-            color: '#00ffe7',
+            color: 'var(--color-primary)',
           }}
           className="mobile-menu-btn"
-          aria-label="Toggle menu"
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -154,10 +155,10 @@ export default function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div style={{
-          background: 'rgba(2,11,20,0.97)',
-          borderTop: '1px solid rgba(0,255,231,0.1)',
-          padding: '16px 24px 24px',
-          display: 'flex', flexDirection: 'column', gap: '4px',
+          background: 'rgba(2, 6, 12, 0.98)',
+          borderTop: '1px solid rgba(0, 229, 255, 0.1)',
+          padding: '24px',
+          display: 'flex', flexDirection: 'column', gap: '8px',
         }}>
           {navLinks.map(link => (
             <a
@@ -165,26 +166,15 @@ export default function Navbar() {
               href={link.href}
               onClick={() => setOpen(false)}
               style={{
-                fontFamily: "'Share Tech Mono', monospace",
-                fontSize: '0.85rem',
-                letterSpacing: '0.08em',
+                fontFamily: "var(--font-mono)",
+                fontSize: '0.8rem',
+                letterSpacing: '0.1em',
                 textTransform: 'uppercase',
-                color: 'rgba(200,216,232,0.75)',
+                color: 'rgba(255, 255, 255, 0.6)',
                 textDecoration: 'none',
                 padding: '12px 16px',
                 borderRadius: '8px',
-                borderLeft: '2px solid transparent',
                 transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.color = '#00ffe7';
-                e.currentTarget.style.borderLeftColor = '#00ffe7';
-                e.currentTarget.style.background = 'rgba(0,255,231,0.05)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.color = 'rgba(200,216,232,0.75)';
-                e.currentTarget.style.borderLeftColor = 'transparent';
-                e.currentTarget.style.background = 'transparent';
               }}
             >
               {link.label}
@@ -194,7 +184,7 @@ export default function Navbar() {
       )}
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 850px) {
           .desktop-nav { display: none !important; }
           .mobile-menu-btn { display: flex !important; }
         }

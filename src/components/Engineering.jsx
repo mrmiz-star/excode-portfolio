@@ -1,116 +1,121 @@
 import React from 'react';
-import { Server, Cpu, Layers } from 'lucide-react';
+import { Server, Cpu, Layers, Activity, Zap, Shield, Workflow } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { systemStatus, globalMetrics } from '../config/systemStatus';
 
-const PILLARS = [
-  {
-    icon: Cpu,
-    label: "What I Build",
-    color: "var(--color-primary)",
-    points: [
-      "Systems that solve real-world operational problems — not tutorial projects",
-      "Backend-heavy applications with full data flow: auth, storage, API, logic",
-      "Low-level tools with real OS integration — DLL injection, process control, HWID",
-    ],
-  },
-  {
-    icon: Layers,
-    label: "How I Think",
-    color: "var(--color-secondary)",
-    points: [
-      "Structure first — architecture is designed before a single line is written",
-      "Clean architecture over quick hacks — modular, replaceable, scalable layers",
-      "Security is a foundation, not a feature — HWID auth, zero-trust design by default",
-    ],
-  },
-  {
-    icon: Server,
-    label: "What's Different",
-    color: "var(--color-accent)",
-    points: [
-      "I don't build demos — I build usable systems deployed to real users",
-      "Every project is a complete loop: design → build → deploy → monitor",
-      "Focus on logic and system reliability, not just UI polish",
-    ],
-  },
+const IDENTITY_METRICS = [
+  { label: "Async Infrastructure", detail: "High-concurrency logic", icon: Workflow },
+  { label: "Realtime Systems", detail: "Live data orchestration", icon: Zap },
+  { label: "Telemetry Architecture", detail: "System-wide monitoring", icon: Activity },
+  { label: "Security Automation", detail: "Zero-trust hardening", icon: Shield },
 ];
 
 export default function Engineering() {
   const [ref, isVisible] = useScrollReveal();
 
   return (
-    <section id="engineering" style={{ padding: '120px 24px' }}>
+    <section id="engineering" style={{ padding: '120px 24px', position: 'relative' }}>
       <div ref={ref} className={`reveal ${isVisible ? 'is-visible' : ''}`} style={{ maxWidth: '1280px', margin: '0 auto' }}>
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <span className="section-label">// engineering.focus</span>
+          <span className="section-label">// engineering.telemetry</span>
           <h2 style={{
             fontSize: 'clamp(2.5rem,5vw,3.5rem)', fontWeight: 800,
             color: '#fff', marginTop: '12px', marginBottom: '16px',
             letterSpacing: '-0.02em'
           }}>
-            How I <span style={{ color: 'var(--color-primary)', textShadow: '0 0 30px var(--color-primary-glow)' }}>Engineer</span>
+            System <span style={{ color: 'var(--color-primary)', textShadow: '0 0 30px var(--color-primary-glow)' }}>Operational</span> Board
           </h2>
           <p style={{
-            color: 'var(--color-text-dim)', maxWidth: '440px',
+            color: 'var(--color-text-dim)', maxWidth: '480px',
             margin: '0 auto', fontSize: '1.05rem', lineHeight: 1.7,
           }}>
-            Not a tutorial developer. Not a framework copier. A systems builder.
+            Operational status of the MIZ engineering ecosystem powered through EX CODE infrastructure.
           </p>
         </div>
 
-        {/* Pillars */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '32px',
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+          gap: '32px' 
         }}>
-          {PILLARS.map((p, i) => (
-            <div
-              key={p.label}
-              className="glass-card"
-              style={{
-                padding: '48px 40px',
-                display: 'flex',
-                flexDirection: 'column',
-                height: '100%',
-                borderRadius: '24px'
-              }}
-            >
-              <div style={{
-                width: '60px', height: '60px', borderRadius: '18px',
-                background: `${p.color}10`, border: `1px solid ${p.color}25`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                marginBottom: '32px', boxShadow: `0 0 30px ${p.color}15`,
-              }}>
-                <p.icon size={28} color={p.color} />
-              </div>
-
-              <h3 style={{
-                fontSize: '1rem', fontWeight: 700, color: p.color,
-                fontFamily: "var(--font-mono)",
-                letterSpacing: '0.15em', marginBottom: '24px',
-                textTransform: 'uppercase',
-              }}>
-                {p.label}
-              </h3>
-
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                {p.points.map((point, j) => (
-                  <li key={j} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
-                    <span style={{
-                      color: p.color, fontFamily: "var(--font-mono)",
-                      fontSize: '1rem', flexShrink: 0, marginTop: '2px', opacity: 0.6,
-                    }}>›</span>
-                    <span style={{ fontSize: '0.95rem', color: 'var(--color-text-dim)', lineHeight: 1.7 }}>
-                      {point}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+          
+          {/* Main Dashboard Panel */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+            
+            {/* System Status Board */}
+            <div className="glass-card" style={{ padding: '40px', borderRadius: '24px', border: '1px solid rgba(0, 229, 255, 0.1)' }}>
+               <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'rgba(0, 229, 255, 0.6)', letterSpacing: '0.2em', marginBottom: '32px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                 <Activity size={16} /> SYSTEM STATUS
+               </h3>
+               
+               <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                 {Object.values(systemStatus).map((sys, i) => (
+                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '12px' }}>
+                     <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                        <span style={{ 
+                          width: '8px', height: '8px', borderRadius: '50%', 
+                          background: sys.status === 'stable' || sys.status === 'operational' ? '#39ff14' : '#00e5ff',
+                          boxShadow: `0 0 10px ${sys.status === 'stable' || sys.status === 'operational' ? '#39ff14' : '#00e5ff'}80`,
+                          animation: 'pulse 2s infinite'
+                        }} />
+                        <span style={{ color: '#fff', fontSize: '0.95rem', fontWeight: 600 }}>{sys.label}</span>
+                     </div>
+                     <span style={{ 
+                       fontFamily: 'var(--font-mono)', fontSize: '0.75rem', 
+                       color: sys.status === 'stable' || sys.status === 'operational' ? '#39ff14' : '#00e5ff',
+                       textTransform: 'uppercase', letterSpacing: '0.1em'
+                     }}>
+                       {sys.status}
+                     </span>
+                   </div>
+                 ))}
+               </div>
             </div>
-          ))}
+
+            {/* Identity Metrics Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px' }}>
+               {IDENTITY_METRICS.map((m, i) => (
+                 <div key={i} className="glass-card" style={{ padding: '30px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'flex-start', gap: '20px' }}>
+                    <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(0, 229, 255, 0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                       <m.icon size={20} color="var(--color-primary)" />
+                    </div>
+                    <div>
+                       <div style={{ color: '#fff', fontWeight: 700, fontSize: '0.9rem', marginBottom: '4px' }}>{m.label}</div>
+                       <div style={{ color: 'var(--color-text-dim)', fontSize: '0.78rem' }}>{m.detail}</div>
+                    </div>
+                 </div>
+               ))}
+            </div>
+
+          </div>
+
+          {/* Sidebar Metrics */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+             <div className="glass-card" style={{ padding: '40px', borderRadius: '24px', background: 'rgba(0, 229, 255, 0.02)', border: '1px solid rgba(0, 229, 255, 0.1)' }}>
+                <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: '#fff', letterSpacing: '0.15em', marginBottom: '32px' }}>LIVE METRICS</h3>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+                   {globalMetrics.map((m, i) => (
+                     <div key={i}>
+                        <div style={{ fontSize: '2.5rem', fontWeight: 900, color: m.color, marginBottom: '4px', letterSpacing: '-0.05em' }}>{m.value}</div>
+                        <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{m.label}</div>
+                     </div>
+                   ))}
+                </div>
+
+                <div style={{ marginTop: '40px', padding: '20px', background: 'rgba(57, 255, 20, 0.05)', border: '1px solid rgba(57, 255, 20, 0.2)', borderRadius: '12px' }}>
+                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#39ff14', fontSize: '0.75rem', fontWeight: 700, fontFamily: 'var(--font-mono)', marginBottom: '8px' }}>
+                      <Zap size={14} /> ACTIVE PIPELINE
+                   </div>
+                   <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.78rem', lineHeight: 1.5 }}>
+                      Refining telemetry systems and modular engineering infrastructure.
+                   </div>
+                </div>
+             </div>
+          </div>
+
         </div>
       </div>
     </section>
