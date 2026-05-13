@@ -56,9 +56,9 @@ export default function Contact() {
       <div style={{ maxWidth: '960px', margin: '0 auto' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <span className="section-label">// contact.terminal</span>
+          <span className="section-label">CONTACT</span>
           <h2 style={{ fontSize: 'clamp(2.5rem,5vw,3.5rem)', fontWeight: 800, color: '#fff', marginTop: '12px', marginBottom: '16px', letterSpacing: '-0.02em' }}>
-            Open a <span style={{ color: 'var(--color-primary)', textShadow: '0 0 30px var(--color-primary-glow)' }}>Channel</span>
+            Let's <span style={{ color: 'var(--color-primary)', textShadow: '0 0 30px var(--color-primary-glow)' }}>Talk</span>
           </h2>
           <p style={{ color: 'var(--color-text-dim)', maxWidth: '480px', margin: '0 auto', fontSize: '1.05rem', lineHeight: 1.7 }}>
             Have a project or want to collaborate? Drop a message — I respond fast.

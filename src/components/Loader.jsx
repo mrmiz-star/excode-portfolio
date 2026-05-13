@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 const lines = [
-  "> Booting EX CODE Systems...",
-  "> Initializing Core Modules...",
-  "> Loading Portfolio Interface...",
-  "> Access Granted"
+  "MIZ",
+  "Developer Portfolio",
+  "Loading..."
 ];
 
 const Loader = () => {
@@ -51,7 +50,7 @@ const Loader = () => {
       <div className="w-full max-w-2xl px-6 flex flex-col">
         {/* Top Label */}
         <div className="mb-8 text-xs tracking-[0.3em] text-[#00ffe7] opacity-50 font-mono">
-          [ EX CODE SYSTEM ]
+          MIZ PORTFOLIO
         </div>
 
         {/* Terminal Text */}

@@ -12,7 +12,7 @@ export default function Skills() {
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <span className="section-label">// engineering.domains</span>
+          <span className="section-label">SKILLS</span>
           <h2 style={{
             fontSize: 'clamp(2.5rem,5vw,3.5rem)', fontWeight: 800,
             color: '#fff', marginTop: '12px', marginBottom: '16px',
@@ -106,7 +106,7 @@ export default function Skills() {
                 color: 'rgba(255,255,255,0.2)',
                 letterSpacing: '0.1em'
               }}>
-                {group.label.toUpperCase()} // DOMAIN_VERIFIED
+                {group.label.toUpperCase()}
               </div>
 
             </div>

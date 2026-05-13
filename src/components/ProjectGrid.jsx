@@ -21,7 +21,7 @@ export default function ProjectGrid({ onOpenDetails }) {
       {/* Header */}
       <div style={{ marginBottom: '64px', textAlign: 'center' }}>
         <span className="section-label" style={{ opacity: 0.7 }}>
-          // projects.exe
+          PROJECTS
         </span>
         <h2 style={{
           fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800,

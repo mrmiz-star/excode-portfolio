@@ -150,7 +150,7 @@ body {
   height: 100px;
   width: 100%;
   animation: scanline 12s linear infinite;
-  opacity: 0.3;
+  opacity: 0.1;
 }
 
 /* ── Mouse Trail ── */

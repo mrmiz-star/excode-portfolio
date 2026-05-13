@@ -53,6 +53,8 @@ export const projects = [
     status: "production",
     github: "https://github.com/qarizafar12-max/EXCODE-Discord-Management-System",
     demo: "#",
+    videoDemo: "https://youtube.com/@miz-army",
+    tutorial: "https://youtube.com/@miz-army",
     color: "#5865f2",
     image: excodeSentinelImg,
     screenshots: [
@@ -68,17 +70,17 @@ export const skillGroups = [
   {
     label: "Backend & Systems",
     color: "var(--color-primary)",
-    skills: ["Python", "C++", "Flask", "Node.js", "SQLite", "Windows API", "REST APIs", "Async Programming"]
+    skills: ["Python", "C++", "Flask", "SQLite", "Node.js", "REST APIs"]
   },
   {
-    label: "Frontend & Design",
+    label: "Frontend",
     color: "var(--color-secondary)",
-    skills: ["React", "JavaScript", "CSS3", "Design Systems", "UI/UX Architecture", "Vite", "Responsive Design"]
+    skills: ["React", "JavaScript", "Tailwind", "Vite"]
   },
   {
-    label: "Automation & Security",
+    label: "Automation & Tools",
     color: "var(--color-accent)",
-    skills: ["CI/CD Pipelines", "System Hardening", "AI Integration", "Bot Development", "Event-Driven Systems", "Tooling"]
+    skills: ["Discord Bots", "CI/CD", "System Automation", "AI Tools"]
   }
 ];
 

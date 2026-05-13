@@ -3,10 +3,11 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { Terminal, Zap, Code, Bot, Globe, Database } from 'lucide-react';
 
 const FOCUS_ITEMS = [
-  { icon: Bot, label: 'Automation Tools', desc: 'Building smart bots and automated workflows to streamline Discord and system tasks.' },
-  { icon: Globe, label: 'Web Applications', desc: 'Developing responsive, high-performance web platforms using React and modern toolkits.' },
-  { icon: Database, label: 'Backend Systems', desc: 'Engineering robust server-side logic and database schemas for scalable data management.' },
-  { icon: Code, label: 'Experimental Coding', desc: 'Exploring AI-assisted development and native C++ systems engineering.' },
+  { icon: Bot, label: 'Building automation tools', desc: 'Streamlining repetitive tasks and workflows.' },
+  { icon: Terminal, label: 'Developing Discord systems', desc: 'Creating community management and security bots.' },
+  { icon: Globe, label: 'Creating web applications', desc: 'Building responsive, fast, and modern frontends.' },
+  { icon: Zap, label: 'Exploring AI-assisted development', desc: 'Integrating LLMs into daily engineering tasks.' },
+  { icon: Code, label: 'Improving system design skills', desc: 'Learning scalable architecture patterns.' },
 ];
 
 export default function ActiveDev() {
@@ -18,13 +19,13 @@ export default function ActiveDev() {
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <span className="section-label">// current.focus</span>
+          <span className="section-label">FOCUS</span>
           <h2 style={{
             fontSize: 'clamp(2.5rem,5vw,3.5rem)', fontWeight: 800,
             color: '#fff', marginTop: '12px', marginBottom: '16px',
             letterSpacing: '-0.02em'
           }}>
-            What I'm <span style={{ color: 'var(--color-primary)', textShadow: '0 0 30px var(--color-primary-glow)' }}>Building</span> Now
+            What I'm <span style={{ color: 'var(--color-primary)', textShadow: '0 0 30px var(--color-primary-glow)' }}>Working</span> On
           </h2>
           <p style={{
             color: 'var(--color-text-dim)', maxWidth: '500px',
@@ -70,7 +71,7 @@ export default function ActiveDev() {
         }}>
            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#39ff14', boxShadow: '0 0 10px #39ff14' }} />
            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em' }}>
-             ALWAYS_LEARNING // CONSTANT_ITERATION
+             Actively building and learning every day
            </span>
         </div>
 

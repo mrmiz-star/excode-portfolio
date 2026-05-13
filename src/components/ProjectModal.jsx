@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, Globe, Info, Target, Layout, Image as ImageIcon } from 'lucide-react';
+import { X, Globe, Info, Target, Layout, Image as ImageIcon, Play, Video } from 'lucide-react';
 
 function GithubIcon({ size = 18 }) {
   return (
@@ -43,7 +43,7 @@ export default function ProjectModal({ project, onClose }) {
           background: 'rgba(255, 255, 255, 0.01)'
         }}>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'rgba(255, 255, 255, 0.4)', letterSpacing: '0.1em' }}>
-            PROJECT_DETAILS // {project.title.toUpperCase()}
+            {project.title.toUpperCase()}
           </span>
           <button 
             className="modal-close-btn" 
@@ -137,13 +137,23 @@ export default function ProjectModal({ project, onClose }) {
 
                 {/* Actions */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                   {project.videoDemo && (
+                     <a href={project.videoDemo} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', padding: '16px', borderRadius: '6px', background: 'var(--color-primary)', color: 'var(--color-bg-deep)', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 800 }}>
+                        <Play size={18} /> WATCH DEMO VIDEO
+                     </a>
+                   )}
+                   {project.tutorial && (
+                     <a href={project.tutorial} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', padding: '16px', borderRadius: '6px', background: 'var(--color-primary)', color: 'var(--color-bg-deep)', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 800 }}>
+                        <Video size={18} /> WATCH TUTORIAL
+                     </a>
+                   )}
                    {project.github && (
                      <a href={project.github} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', padding: '16px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', color: '#fff', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 700 }}>
                         <GithubIcon size={18} /> VIEW ON GITHUB
                      </a>
                    )}
                    {project.demo && project.demo !== '#' && (
-                     <a href={project.demo} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', padding: '16px', borderRadius: '6px', background: 'var(--color-primary)', color: 'var(--color-bg-deep)', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 800 }}>
+                     <a href={project.demo} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', padding: '16px', borderRadius: '6px', background: 'rgba(255, 255, 255, 0.08)', color: '#fff', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 800 }}>
                         <Globe size={18} /> LIVE PREVIEW
                      </a>
                    )}
