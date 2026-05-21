@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowDown, Terminal, Zap } from 'lucide-react';
+import { Terminal, Database, Shield, Cpu } from 'lucide-react';
 import { identity } from '../config/identity';
+import { globalMetrics } from '../config/systemStatus';
 
 const TYPED_STRINGS = [
   'Systems Developer',
@@ -56,13 +57,14 @@ export default function Hero() {
     let particles = [];
     
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      particles = Array.from({length: 40}, () => ({
+      if (!canvas) return;
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
+      particles = Array.from({length: 25}, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        s: Math.random() * 0.8 + 0.2,
-        o: Math.random() * 0.2 + 0.05
+        s: Math.random() * 0.4 + 0.1,
+        o: Math.random() * 0.15 + 0.05
       }));
     };
     
@@ -70,137 +72,144 @@ export default function Hero() {
     window.addEventListener('resize', resize);
     
     const draw = () => {
+      if (!ctx || !canvas) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = '#00e5ff';
       particles.forEach(p => {
-        p.y -= p.s * 0.3;
+        p.y -= p.s * 0.2;
         if (p.y < 0) p.y = canvas.height;
         ctx.globalAlpha = p.o;
-        ctx.fillRect(p.x, p.y, 1, 1);
+        ctx.fillRect(p.x, p.y, 1.2, 1.2);
       });
       animId = requestAnimationFrame(draw);
     };
     
     draw();
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
+    return () => { 
+      cancelAnimationFrame(animId); 
+      window.removeEventListener('resize', resize); 
+    };
   }, []);
 
   return (
-    <section id="home" style={{
+    <div className="glass-card" style={{
       position: 'relative', 
-      minHeight: '100vh', 
-      display: 'flex', 
-      alignItems: 'center', 
-      justifyContent: 'center',
-      background: 'var(--color-bg-deep)', 
+      borderRadius: '8px',
       overflow: 'hidden',
-      padding: '40px 20px'
+      padding: '40px 32px',
+      marginBottom: '24px',
+      border: '1px solid var(--color-border-dim)'
     }}>
-      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, opacity: 0.25, pointerEvents: 'none' }} />
+      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
       
-      <div style={{ 
-        position: 'relative', 
-        zIndex: 10, 
-        maxWidth: '1100px', 
-        width: '100%', 
-        textAlign: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-      }}>
+      <div style={{ position: 'relative', zIndex: 2 }}>
         
-        {/* Main Branding: MIZ */}
-        <div style={{ marginBottom: '20px', width: '100%' }}>
-          <h1 style={{ 
-            fontSize: 'clamp(4rem, 16vw, 10rem)', 
-            fontWeight: 950, 
-            letterSpacing: '-0.06em', 
-            lineHeight: 0.85, 
-            color: 'var(--color-primary)',
-            margin: 0,
-            textShadow: '0 0 30px var(--color-primary-glow)',
-            wordBreak: 'break-word',
-            animation: 'fadeIn 0.5s ease-out'
+        {/* Header telemetry tag */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+          <span style={{ 
+            fontFamily: 'var(--font-mono)', 
+            fontSize: '0.65rem', 
+            color: 'var(--color-primary)', 
+            letterSpacing: '0.15em', 
+            background: 'rgba(0, 229, 255, 0.05)',
+            padding: '4px 8px',
+            borderRadius: '4px',
+            border: '1px solid rgba(0, 229, 255, 0.1)'
           }}>
-            {identity.developerName}
-          </h1>
+            SYSTEM: OVERVIEW
+          </span>
+          <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--color-primary)' }} />
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'rgba(255,255,255,0.3)' }}>
+            OPERATOR: MIZ
+          </span>
         </div>
 
-        {/* Subtitle / Role (TYPED ANIMATION) */}
-        <div style={{ marginBottom: '24px', minHeight: '1.5em', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-           <h2 style={{ 
-             fontSize: 'clamp(1rem, 2.5vw, 1.4rem)', 
-             fontWeight: 700, 
-             color: '#fff', 
-             letterSpacing: '0.05em',
-             opacity: 0.9,
-             fontFamily: 'var(--font-sans)',
-             textTransform: 'uppercase'
-           }}>
-             {typedText}
-             <span style={{ 
-               display: 'inline-block', width: '3px', height: '1.1em', background: 'var(--color-primary)', 
-               marginLeft: '6px', verticalAlign: 'middle', animation: 'pulse-glow 0.8s infinite' 
-             }} />
-           </h2>
-        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '24px' }}>
+          <div>
+            <h1 style={{ 
+              fontSize: 'clamp(2rem, 5vw, 3.2rem)', 
+              fontWeight: 900, 
+              letterSpacing: '-0.04em', 
+              lineHeight: 1, 
+              color: '#fff',
+              margin: '0 0 12px 0'
+            }}>
+              MIZ Engineering
+            </h1>
 
-        {/* Supporting Line: Simple & Human */}
-        <p style={{ 
-          fontSize: 'clamp(1rem, 2vw, 1.15rem)', 
-          color: 'var(--color-text-dim)', 
-          maxWidth: '540px', 
-          lineHeight: 1.6, 
-          marginBottom: '48px',
-          fontWeight: 400
-        }}>
-          Building projects in web, systems, AI tools, and automation.
-        </p>
+            {/* Typewriter subtitle */}
+            <div style={{ minHeight: '1.2em', display: 'flex', alignItems: 'center' }}>
+              <span style={{ 
+                fontFamily: 'var(--font-mono)', 
+                fontSize: '0.88rem', 
+                color: 'var(--color-primary)',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase',
+                fontWeight: 700
+              }}>
+                &gt; {typedText}
+                <span style={{ 
+                  display: 'inline-block', width: '2px', height: '1em', background: 'var(--color-primary)', 
+                  marginLeft: '4px', verticalAlign: 'middle', animation: 'pulse-glow 0.8s infinite' 
+                }} />
+              </span>
+            </div>
+            
+            <p style={{
+              color: 'var(--color-text-dim)',
+              fontSize: '0.9rem',
+              lineHeight: 1.6,
+              maxWidth: '540px',
+              marginTop: '16px',
+              marginRight: '0',
+              marginBottom: '0'
+            }}>
+              Systems and toolchain development specializing in core network engines, hardware optimization heuristics, and secure automation infrastructure.
+            </p>
+          </div>
 
-        {/* CTA Actions */}
-        <div style={{ 
-          display: 'flex', 
-          gap: '16px', 
-          justifyContent: 'center', 
-          flexWrap: 'wrap', 
-          width: '100%'
-        }}>
-           <a href="#projects" style={{
-             padding: '18px 48px', borderRadius: '4px', background: 'var(--color-primary)', color: 'var(--color-bg-deep)',
-             fontSize: '0.9rem', fontWeight: 900, textDecoration: 'none', fontFamily: 'var(--font-mono)',
-             letterSpacing: '0.1em', display: 'flex', alignItems: 'center', gap: '12px', transition: 'all 0.3s ease'
-           }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 229, 255, 0.2)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
-           >
-             VIEW PROJECTS
-           </a>
-           <a href="#contact" style={{
-             padding: '18px 48px', borderRadius: '4px', background: 'rgba(255,255,255,0.02)', color: '#fff',
-             fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none', fontFamily: 'var(--font-mono)',
-             letterSpacing: '0.1em', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid rgba(255,255,255,0.08)', transition: 'all 0.3s ease'
-           }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; }}
-           >
-             GET IN TOUCH
-           </a>
+          {/* Core metrics readout grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(2, 1fr)', 
+            gap: '16px',
+            minWidth: '260px'
+          }}>
+            {globalMetrics.map((m, i) => (
+              <div key={i} style={{ 
+                background: 'rgba(255, 255, 255, 0.01)', 
+                border: '1px solid var(--color-border-dim)', 
+                borderRadius: '4px',
+                padding: '12px 16px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px'
+              }}>
+                <span style={{ 
+                  fontSize: '1.5rem', 
+                  fontWeight: 900, 
+                  color: m.color || '#fff', 
+                  lineHeight: 1, 
+                  letterSpacing: '-0.02em' 
+                }}>
+                  {m.value}
+                </span>
+                <span style={{ 
+                  fontFamily: 'var(--font-mono)', 
+                  fontSize: '0.58rem', 
+                  color: 'rgba(255,255,255,0.3)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  {m.label}
+                </span>
+              </div>
+            ))}
+          </div>
+
         </div>
 
       </div>
-
-      {/* Scroll Hint */}
-      <a href="#projects" style={{
-        position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)',
-        color: 'rgba(255,255,255,0.15)', textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px',
-        transition: 'all 0.3s'
-      }}
-        onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.3)'}
-        onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.15)'}
-      >
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', letterSpacing: '0.3em' }}>SCROLL</span>
-        <ArrowDown size={14} className="animate-bounce" />
-      </a>
-    </section>
+    </div>
   );
 }

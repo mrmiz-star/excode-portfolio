@@ -49,20 +49,19 @@ const Loader = () => {
     >
       <div className="w-full max-w-2xl px-6 flex flex-col">
         {/* Top Label */}
-        <div className="mb-8 text-xs tracking-[0.3em] text-[#00ffe7] opacity-50 font-mono">
+        <div className="mb-8 text-xs tracking-[0.3em] text-[#00f2ff] opacity-50 font-mono">
           MIZ PORTFOLIO
         </div>
 
         {/* Terminal Text */}
         <div className="font-mono text-sm md:text-base leading-relaxed mb-8 min-h-[120px]">
           {renderedLines.map((line, i) => (
-            <div key={i} className={i === 3 ? "text-[#39ff14] drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]" : "text-[#00ffe7] drop-shadow-[0_0_8px_rgba(0,255,231,0.8)]"}>
+            <div key={i} className="text-[#00f2ff] drop-shadow-[0_0_8px_rgba(0,242,255,0.8)]">
               {line}
-              {i === 3 && lineIndex >= lines.length && <span className="animate-[blinkOpacity_1s_step-end_infinite] ml-1">_</span>}
             </div>
           ))}
           {lineIndex < lines.length && (
-            <div className="text-[#00ffe7] drop-shadow-[0_0_8px_rgba(0,255,231,0.8)]">
+            <div className="text-[#00f2ff] drop-shadow-[0_0_8px_rgba(0,242,255,0.8)]">
               {lines[lineIndex].substring(0, charIndex)}
               <span className="animate-[blinkOpacity_1s_step-end_infinite] ml-1">_</span>
             </div>
@@ -70,10 +69,10 @@ const Loader = () => {
         </div>
 
         {/* Progress Bar */}
-        <div className="h-[2px] w-full bg-[#00ffe7]/10 relative overflow-hidden">
+        <div className="h-[2px] w-full bg-[#00f2ff]/10 relative overflow-hidden">
           {showProgress && (
             <div 
-              className="absolute top-0 left-0 h-full bg-[#00ffe7] shadow-[0_0_10px_#00ffe7]"
+              className="absolute top-0 left-0 h-full bg-[#00f2ff] shadow-[0_0_10px_#00f2ff]"
               style={{
                 animation: 'fillProgress 1.5s ease-out forwards'
               }}
