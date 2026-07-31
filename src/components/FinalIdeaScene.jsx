@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2, Globe2, Sparkles, Mail, Copy, ExternalLink, Check } from 'lucide-react';
+import { ArrowRight, Globe2, Sparkles, Mail, Copy, Check, ExternalLink } from 'lucide-react';
 
-export default function Contact() {
+export default function FinalIdeaScene() {
   const [copied, setCopied] = useState(false);
   const [showEmailDetails, setShowEmailDetails] = useState(false);
 
@@ -26,25 +26,24 @@ export default function Contact() {
         </svg>
       ),
       color: 'from-emerald-500/20 to-teal-500/10 border-emerald-500/30 text-emerald-400 hover:border-emerald-400',
-      badge: 'Direct WhatsApp',
-      isDirectLink: true,
+      badge: 'WhatsApp',
     },
     {
       id: 'email',
       title: 'Email',
       actionText: 'Send project details →',
-      desc: 'Send your requirements directly to my inbox via your preferred mail client',
-      href: 'mailto:mrmiz@excode.dev?subject=Project%20Inquiry%20-%20MR%20MIZ',
+      desc: 'Send your requirements directly via mail client or copy email address',
+      href: `mailto:${emailAddress}?subject=Project%20Inquiry%20-%20MR%20MIZ`,
       svg: <Mail className="w-6 h-6 text-cyan-400" />,
       color: 'from-cyan-500/20 to-blue-500/10 border-cyan-500/30 text-cyan-400 hover:border-cyan-400',
-      badge: 'Direct Email',
+      badge: 'Email',
       isEmailOption: true,
     },
     {
       id: 'linkedin',
       title: 'LinkedIn',
       actionText: 'Connect professionally →',
-      desc: 'Connect directly on LinkedIn for professional network collaboration',
+      desc: 'Connect directly on LinkedIn for business collaboration',
       href: 'https://linkedin.com',
       svg: (
         <svg className="w-6 h-6 fill-current text-blue-400" viewBox="0 0 24 24">
@@ -52,49 +51,46 @@ export default function Contact() {
         </svg>
       ),
       color: 'from-blue-600/20 to-indigo-500/10 border-blue-500/30 text-blue-400 hover:border-blue-400',
-      badge: 'Direct LinkedIn',
-      isDirectLink: true,
+      badge: 'LinkedIn',
     },
   ];
 
   return (
-    <section id="contact" className="relative z-10 py-24 bg-[#05070B] border-t border-slate-800/80">
+    <section id="contact" className="relative z-10 py-36 bg-[#030509] border-t border-slate-900/80">
       
-      {/* Ambient background glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
+      {/* Glow Halo */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-cyan-500/10 via-blue-600/10 to-violet-600/10 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        {/* Main Headline Scene */}
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            DIRECT CONTACT
+            <Sparkles className="w-3.5 h-3.5" />
+            FINAL SCENE // CONVERSION
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight">
-            Let's Build <span className="text-gradient-cyan">Something</span>
+          <h2 className="text-4xl sm:text-7xl font-extrabold text-white tracking-tight uppercase">
+            Maybe Your Idea <br />
+            <span className="text-gradient-cyan">Is Next.</span>
           </h2>
 
-          <p className="text-lg sm:text-xl text-slate-300 font-medium">
-            Have a project idea or need a custom software solution?
-          </p>
-
-          <p className="text-xs sm:text-sm font-mono text-cyan-400/90 pt-2">
-            Choose how you'd like to contact me:
-          </p>
+          <div className="space-y-2 text-slate-300 text-lg sm:text-2xl font-medium">
+            <p>"You have the idea."</p>
+            <p className="text-cyan-300 font-bold">"I can help turn it into software."</p>
+          </div>
         </div>
 
-        {/* 3 Contact Choice Cards */}
+        {/* 3 Real Contact Channels */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {contactOptions.map((opt) => (
             <div
               key={opt.id}
-              className="glass-card-interactive p-7 rounded-2xl border border-slate-800/80 bg-slate-900/50 flex flex-col justify-between group transition-all"
+              className="glass-card-interactive p-8 rounded-3xl border border-slate-800/80 bg-slate-950/60 flex flex-col justify-between group transition-all"
             >
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <div className={`p-3 rounded-xl bg-gradient-to-br ${opt.color} border flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                  <div className={`p-3.5 rounded-2xl bg-gradient-to-br ${opt.color} border flex items-center justify-center group-hover:scale-110 transition-transform`}>
                     {opt.svg}
                   </div>
                   <span className="text-[10px] font-mono font-medium px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 border border-slate-700">
@@ -102,7 +98,7 @@ export default function Contact() {
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                <h3 className="text-2xl font-extrabold text-white mb-2 group-hover:text-cyan-300 transition-colors uppercase">
                   {opt.title}
                 </h3>
 
@@ -115,7 +111,7 @@ export default function Contact() {
                 <div className="space-y-2">
                   <a
                     href={opt.href}
-                    className="w-full py-3 px-4 rounded-xl text-xs font-bold bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 transition-all flex items-center justify-between"
+                    className="w-full py-3.5 px-4 rounded-xl text-xs font-mono font-bold bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 transition-all flex items-center justify-between"
                   >
                     <span>{opt.actionText}</span>
                     <ExternalLink className="w-4 h-4" />
@@ -125,7 +121,7 @@ export default function Contact() {
                     onClick={() => setShowEmailDetails(!showEmailDetails)}
                     className="w-full text-center text-[11px] font-mono text-slate-400 hover:text-cyan-300 transition-colors py-1 cursor-pointer"
                   >
-                    {showEmailDetails ? 'Hide email details' : 'Show email address & copy options'}
+                    {showEmailDetails ? 'Hide email details' : 'Show email address & copy option'}
                   </button>
                 </div>
               ) : (
@@ -133,7 +129,7 @@ export default function Contact() {
                   href={opt.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3 px-4 rounded-xl text-xs font-bold bg-slate-800/80 border border-slate-700/80 text-white hover:border-cyan-400/50 hover:text-cyan-300 transition-all flex items-center justify-between"
+                  className="w-full py-3.5 px-4 rounded-xl text-xs font-mono font-bold bg-slate-800/80 border border-slate-700/80 text-white hover:border-cyan-400/50 hover:text-cyan-300 transition-all flex items-center justify-between"
                 >
                   <span>{opt.actionText}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -143,7 +139,7 @@ export default function Contact() {
           ))}
         </div>
 
-        {/* Email Direct Details Box */}
+        {/* Email Direct Details Drawer */}
         {showEmailDetails && (
           <div className="mb-12 glass-panel p-6 rounded-2xl border border-cyan-500/30 bg-[#0A1325] animate-fadeIn max-w-xl mx-auto space-y-4">
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -163,7 +159,7 @@ export default function Contact() {
               
               <button
                 onClick={copyToClipboard}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-xs font-bold text-cyan-300 hover:bg-cyan-500/20 transition-all cursor-pointer"
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-xs font-bold text-cyan-300 hover:bg-cyan-500/20 transition-all cursor-pointer"
               >
                 {copied ? (
                   <>
@@ -178,27 +174,16 @@ export default function Contact() {
                 )}
               </button>
             </div>
-
-            <div className="flex items-center justify-between text-xs text-slate-400 pt-1">
-              <span>Opens directly in your default mail application</span>
-              <a
-                href={`mailto:${emailAddress}?subject=Project%20Inquiry%20-%20MR%20MIZ`}
-                className="text-cyan-400 hover:underline font-semibold"
-              >
-                Open Mail App →
-              </a>
-            </div>
           </div>
         )}
 
-        {/* Local & International Projects Welcome Banner */}
+        {/* Footer Tagline */}
         <div className="p-4 rounded-2xl bg-cyan-500/5 border border-cyan-500/20 text-center flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold text-slate-300">
           <Globe2 className="w-4 h-4 text-cyan-400 shrink-0" />
           <span>Local & international projects welcome.</span>
         </div>
 
       </div>
-
     </section>
   );
 }
