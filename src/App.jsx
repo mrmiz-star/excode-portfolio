@@ -3,15 +3,17 @@ import DigitalBackground from './components/DigitalBackground';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import TrustStrip from './components/TrustStrip';
-import About from './components/About';
 import Services from './components/Services';
+import ProblemSection from './components/ProblemSection';
 import Projects from './components/Projects';
+import About from './components/About';
 import HowIWork from './components/HowIWork';
 import ExcodeBrand from './components/ExcodeBrand';
 import WhyWorkWithMe from './components/WhyWorkWithMe';
 import FaqSection from './components/FaqSection';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 export default function App() {
   const scrollToContact = () => {
@@ -26,44 +28,51 @@ export default function App() {
       {/* Living Animated Canvas Background */}
       <DigitalBackground />
 
-      {/* Main Page Layout */}
+      {/* Main Page Layout - Exact Sequence per task.txt */}
       <div className="relative z-10">
+        {/* 1. Navbar */}
         <Header onOpenContact={scrollToContact} />
         
         <main>
-          {/* Section 2: Hero */}
+          {/* 2. Hero — biggest upgrade (with PyGet X card on right) */}
           <Hero onOpenContact={scrollToContact} />
 
-          {/* Section 3: Quick Trust Strip */}
+          {/* 3. Trust strip (TECHNOLOGY I WORK WITH) */}
           <TrustStrip />
 
-          {/* Section 4: About MR MIZ */}
-          <About />
-
-          {/* Section 5: Services */}
+          {/* 4. Services (WHAT I CAN BUILD - Clean 2x3 Grid with SVG icons) */}
           <Services onOpenContact={scrollToContact} />
 
-          {/* Section 6: Featured Projects */}
+          {/* 5. "Tell me your problem" conversion section */}
+          <ProblemSection onOpenContact={scrollToContact} />
+
+          {/* 6. PyGet X featured case study & More Projects */}
           <Projects onOpenContact={scrollToContact} />
 
-          {/* Section 7: How I Work */}
+          {/* 7. About MR MIZ (Turning Ideas Into Working Software) */}
+          <About onOpenContact={scrollToContact} />
+
+          {/* 8. Process (OUR PROCESS - Horizontal timeline on desktop) */}
           <HowIWork onOpenContact={scrollToContact} />
 
-          {/* Section 8: EXCODE Corporation */}
+          {/* 9. Built Under EXCODE Corporation */}
           <ExcodeBrand onOpenContact={scrollToContact} />
 
-          {/* Section 9: Why Work With Me */}
+          {/* 10. "Why MR MIZ" / The MR MIZ Difference */}
           <WhyWorkWithMe />
 
-          {/* Section 10: Homepage FAQ */}
+          {/* 11. Frequently Asked Questions (7 Q&As) */}
           <FaqSection onOpenContact={scrollToContact} />
 
-          {/* Section 11 & 12: Contact Section */}
+          {/* 12. Contact — Have a business problem? Let's Build the Solution */}
           <Contact />
         </main>
 
-        {/* Section 13: Footer */}
+        {/* 13. Footer */}
         <Footer />
+
+        {/* Floating Quick WhatsApp for Mobile Conversion */}
+        <FloatingWhatsApp />
       </div>
     </div>
   );

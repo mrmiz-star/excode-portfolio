@@ -1,97 +1,111 @@
 import React from 'react';
-import { Globe, Monitor, Bot, Cpu, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, Sparkles, User, CheckCircle2 } from 'lucide-react';
 
-export default function About() {
-  const disciplines = [
-    {
-      title: 'Web Development',
-      desc: 'High-performance web apps, dashboards & systems built to scale.',
-      icon: Globe,
-    },
-    {
-      title: 'Desktop Applications',
-      desc: 'Tailored Windows software built for daily operational workflows.',
-      icon: Monitor,
-    },
-    {
-      title: 'AI / ML',
-      desc: 'Practical machine learning & automated intelligent workflows.',
-      icon: Bot,
-    },
-    {
-      title: 'Automation',
-      desc: 'Streamlining manual repetitive operations into automated pipelines.',
-      icon: Cpu,
-    },
-  ];
-
+export default function About({ onOpenContact }) {
   return (
-    <section id="about" className="relative z-10 py-24 bg-[#05070B]">
+    <section id="about" className="relative z-10 py-28 bg-[#05070B] border-t border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400">
+            <User className="w-3.5 h-3.5" />
+            ABOUT MR MIZ
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Turning Ideas Into <span className="text-gradient-cyan">Working Software.</span>
+          </h2>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Column: Heading & Bio */}
-          <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400">
-              ABOUT MR MIZ
-            </div>
-            
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-              Turning Ideas Into <span className="text-gradient-cyan">Working Software.</span>
-            </h2>
-
-            <div className="space-y-4 text-slate-300 text-base sm:text-lg leading-relaxed">
-              <p className="border-l-2 border-cyan-500/50 pl-4 py-1 italic bg-cyan-500/5 rounded-r-lg">
-                "I'm MR MIZ, a software developer focused on building practical digital solutions for businesses, startups, and individuals."
-              </p>
-              <p>
-                I work across web development, desktop applications, AI/ML, automation, and custom software. My approach centers on clear architecture, robust reliability, and direct developer communication.
-              </p>
-            </div>
-
-            <div className="pt-2 flex items-center gap-6">
-              <div>
-                <span className="block text-2xl font-bold text-white">100%</span>
-                <span className="text-xs text-slate-400 font-mono">Custom Built Code</span>
+          {/* Left Column: Visual Profile Card */}
+          <div className="lg:col-span-5 flex flex-col items-center">
+            <div className="relative w-full max-w-md glass-panel p-8 rounded-3xl border border-cyan-500/25 bg-gradient-to-b from-[#091122] to-[#060A14] text-center space-y-6 shadow-2xl">
+              
+              {/* Profile Avatar Frame */}
+              <div className="relative w-36 h-36 mx-auto rounded-full bg-gradient-to-tr from-cyan-500 via-cyan-300 to-blue-600 p-[3px] shadow-2xl shadow-cyan-500/30">
+                <img
+                  src="/images/logo.png"
+                  alt="Muhammad Ibrahim Zafar (MR MIZ)"
+                  className="w-full h-full object-cover rounded-full bg-slate-950"
+                />
+                <span className="absolute bottom-2 right-2 w-4 h-4 rounded-full bg-emerald-400 border-2 border-slate-950" />
               </div>
-              <div className="w-px h-8 bg-slate-800" />
+
               <div>
-                <span className="block text-2xl font-bold text-cyan-400">Fast</span>
-                <span className="text-xs text-slate-400 font-mono">Turnaround & Support</span>
+                <h3 className="text-2xl font-extrabold text-white tracking-tight">
+                  MR MIZ
+                </h3>
+                <p className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider mt-1">
+                  Muhammad Ibrahim Zafar
+                </p>
+                <p className="text-xs text-slate-400 mt-1">
+                  Founder & Lead Software Developer at EXCODE Corporation
+                </p>
               </div>
+
+              <div className="pt-4 border-t border-slate-800 space-y-2 text-left text-xs font-mono text-slate-300">
+                <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/80 border border-slate-800">
+                  <span className="text-slate-400">Specialization:</span>
+                  <span className="text-cyan-300 font-bold">Python • Web • Windows Apps</span>
+                </div>
+                <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/80 border border-slate-800">
+                  <span className="text-slate-400">Focus:</span>
+                  <span className="text-white font-bold">Client Problem Solving</span>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          {/* Right Column: 4 Disciplines Cards Grid */}
-          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {disciplines.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.title}
-                  className="glass-card-interactive p-6 rounded-2xl flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-4 group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                  <div className="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-xs font-mono text-cyan-400/80">
-                    <span>Core Discipline</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </div>
-                </div>
-              );
-            })}
+          {/* Right Column: Bio Narrative & Four-Step Approach */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            <div className="space-y-4 text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
+              <p>
+                I'm <strong className="text-white font-semibold">Muhammad Ibrahim Zafar (MR MIZ)</strong>, a software developer and the founder of <strong className="text-cyan-300 font-semibold">EXCODE Corporation</strong>.
+              </p>
+
+              <p>
+                I build practical digital solutions for businesses, startups, and individuals—from websites and business systems to Windows applications, automation tools, and AI-powered software.
+              </p>
+            </div>
+
+            {/* Approach Process Box */}
+            <div className="p-6 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 space-y-3">
+              <span className="text-xs font-mono text-cyan-300 uppercase tracking-wider font-bold block">
+                My Approach:
+              </span>
+              <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-bold text-white font-mono">
+                <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700">Understand the problem</span>
+                <span className="text-cyan-400">→</span>
+                <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700">Design the solution</span>
+                <span className="text-cyan-400">→</span>
+                <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700">Build it properly</span>
+                <span className="text-cyan-400">→</span>
+                <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700">Deliver and support it</span>
+              </div>
+            </div>
+
+            <p className="text-slate-300 text-base leading-relaxed">
+              I work directly with clients throughout the development process, keeping communication clear and making sure the final software actually solves the problem it was built for.
+            </p>
+
+            <div className="pt-4">
+              <button
+                onClick={onOpenContact}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 text-xs font-extrabold text-black bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full shadow-lg shadow-cyan-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+              >
+                <span>Work Directly With MR MIZ</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
           </div>
 
         </div>
+
       </div>
     </section>
   );

@@ -126,16 +126,29 @@ export default function ProjectModal({ project, onClose, onOpenContact }) {
             <p className="text-xs text-slate-400 text-center sm:text-left">
               Need a custom solution like this?
             </p>
-            <button
-              onClick={() => {
-                onClose();
-                onOpenContact();
-              }}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold text-black bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full shadow-lg shadow-cyan-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shrink-0"
-            >
-              <span>Discuss Similar Project</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+            <div className="flex flex-wrap gap-2 w-full sm:w-auto justify-end">
+              {project.id === 'pyget-x' && (
+                <a
+                  href="https://mrmiz-star.github.io/PYGETX-WEB/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-bold text-cyan-300 bg-slate-900 border border-cyan-500/30 rounded-full hover:bg-cyan-500/20 transition-all cursor-pointer"
+                >
+                  <span>Open Product Website</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              )}
+              <button
+                onClick={() => {
+                  onClose();
+                  onOpenContact();
+                }}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold text-black bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full shadow-lg shadow-cyan-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shrink-0"
+              >
+                <span>Discuss Similar Project</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
 
         </div>

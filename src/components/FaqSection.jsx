@@ -6,56 +6,56 @@ export default function FaqSection({ onOpenContact }) {
   const [openIndex, setOpenIndex] = useState(0);
   const [showAllModal, setShowAllModal] = useState(false);
 
-  const homeFaqs = [
+  const faqs = [
     {
-      question: 'Can you build a custom website?',
-      answer: 'Yes. I build custom websites, web applications, dashboards, business portals, and e-commerce platforms designed around your specific requirements.',
+      question: 'Can you build custom software for my business?',
+      answer: 'Yes. If you have a business problem that could be solved with software, we can discuss the requirements and determine the right solution.',
     },
     {
-      question: 'Can you build Windows software?',
-      answer: 'Yes. I build custom native Windows desktop applications using Python and PySide6/Qt with multi-threaded performance and clean interfaces.',
+      question: 'Can you build Windows desktop applications?',
+      answer: 'Yes. Custom Windows applications can be developed around your workflow, features, database, and operational requirements.',
     },
     {
       question: 'Do you work with international clients?',
-      answer: 'Yes. I work with both local and international clients across multiple time zones.',
+      answer: 'Yes. Projects from Pakistan and international clients are welcome.',
     },
     {
       question: 'Can you work on an existing project?',
-      answer: 'Yes. I can fix bugs, improve existing software, add new features, refactor codebases, or continue ongoing development.',
+      answer: "Yes. Existing applications can be reviewed, improved, maintained, or extended depending on the project's technology and condition.",
     },
     {
       question: 'How much does a project cost?',
-      answer: 'Pricing depends on the project features, complexity, and timeline. Contact me with your requirements for a direct, clear quote.',
+      answer: "Every project is different. After understanding your requirements, you'll receive a clear scope, timeline, and quotation before development begins.",
+    },
+    {
+      question: 'How long does development take?',
+      answer: "The timeline depends on the project's scope and complexity. A timeline and milestones will be discussed before development starts.",
     },
     {
       question: 'How do I start?',
-      answer: 'Simply send me your project idea or business requirements. We will discuss the features, timeline, and budget before development begins.',
+      answer: "Simply tell me what you're trying to build or what problem you're trying to solve. You don't need to know the technical solution. That's my job.",
     },
   ];
 
   return (
-    <section id="faq" className="relative z-10 py-32 bg-[#050811] border-t border-slate-900/80">
+    <section id="faq" className="relative z-10 py-28 bg-[#050811] border-t border-slate-900/80">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400">
             <HelpCircle className="w-3.5 h-3.5" />
-            CLEAR CONVERSION ANSWERS
+            FREQUENTLY ASKED QUESTIONS
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight uppercase">
-            QUESTIONS YOU <span className="text-gradient-cyan">MIGHT HAVE</span>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight uppercase">
+            ANSWERS TO YOUR <span className="text-gradient-cyan">QUESTIONS</span>
           </h2>
-
-          <p className="text-slate-400 text-sm sm:text-base">
-            Click any question below to inspect the answer.
-          </p>
         </div>
 
-        {/* 6 Interactive Accordion Cards */}
+        {/* 7 Interactive Accordion Cards */}
         <div className="space-y-4 mb-12">
-          {homeFaqs.map((faq, index) => {
+          {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div
@@ -91,14 +91,13 @@ export default function FaqSection({ onOpenContact }) {
           })}
         </div>
 
-        {/* See All Questions CTA */}
+        {/* Start a Project CTA */}
         <div className="text-center">
           <button
-            onClick={() => setShowAllModal(true)}
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-slate-900 border border-slate-700/80 hover:border-cyan-500/50 text-xs font-mono font-bold uppercase tracking-wider text-cyan-300 hover:text-white transition-all shadow-xl cursor-pointer"
+            onClick={onOpenContact}
+            className="inline-flex items-center gap-2.5 px-8 py-3.5 text-xs font-extrabold text-black bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full shadow-lg shadow-cyan-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
           >
-            <span>See All Questions</span>
-            <ArrowRight className="w-4 h-4 text-cyan-400" />
+            <span>Have More Questions? Start a Conversation →</span>
           </button>
         </div>
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight, Code2, Sparkles } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 export default function Header({ onOpenContact }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,13 +14,12 @@ export default function Header({ onOpenContact }) {
         setIsScrolled(false);
       }
 
-      // Simple active link tracking
-      const sections = ['home', 'services', 'projects', 'about', 'excode', 'faq', 'contact'];
+      const sections = ['services', 'projects', 'about', 'faq', 'contact'];
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 200) {
+          if (rect.top <= 250 && rect.bottom >= 150) {
             setActiveSection(section);
             break;
           }
@@ -33,11 +32,9 @@ export default function Header({ onOpenContact }) {
   }, []);
 
   const navItems = [
-    { label: 'Home', href: '#home', id: 'home' },
     { label: 'Services', href: '#services', id: 'services' },
     { label: 'Projects', href: '#projects', id: 'projects' },
     { label: 'About', href: '#about', id: 'about' },
-    { label: 'EXCODE', href: '#excode', id: 'excode' },
     { label: 'FAQ', href: '#faq', id: 'faq' },
     { label: 'Contact', href: '#contact', id: 'contact' },
   ];
@@ -46,13 +43,14 @@ export default function Header({ onOpenContact }) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#05070B]/85 backdrop-blur-xl border-b border-cyan-500/15 py-3.5 shadow-lg shadow-black/40'
+          ? 'bg-[#05070B]/90 backdrop-blur-xl border-b border-cyan-500/15 py-3.5 shadow-xl shadow-black/50'
           : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo & Brand Identity */}
+          
+          {/* Brand Identity */}
           <a
             href="#home"
             className="group flex items-center gap-3 focus:outline-none"
@@ -71,7 +69,7 @@ export default function Header({ onOpenContact }) {
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               </span>
               <span className="text-[10px] font-mono tracking-widest text-cyan-400/80 uppercase">
-                EXCODE CORP
+                EXCODE CORPORATION
               </span>
             </div>
           </a>
@@ -84,7 +82,7 @@ export default function Header({ onOpenContact }) {
                 <a
                   key={item.label}
                   href={item.href}
-                  className={`px-3.5 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
+                  className={`px-4 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
                     isActive
                       ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-semibold'
                       : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
@@ -96,13 +94,13 @@ export default function Header({ onOpenContact }) {
             })}
           </nav>
 
-          {/* Primary Desktop CTA */}
+          {/* Standout Desktop CTA */}
           <div className="hidden md:flex items-center">
             <button
               onClick={onOpenContact}
-              className="group relative inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-semibold tracking-wide text-black bg-gradient-to-r from-cyan-400 via-cyan-300 to-blue-400 rounded-full shadow-lg shadow-cyan-500/25 hover:shadow-cyan-400/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 overflow-hidden cursor-pointer"
+              className="group relative inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold tracking-wide text-black bg-gradient-to-r from-cyan-400 via-cyan-300 to-blue-400 rounded-full shadow-lg shadow-cyan-500/25 hover:shadow-cyan-400/40 hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 cursor-pointer"
             >
-              <span className="relative z-10 flex items-center gap-1.5 font-bold">
+              <span className="relative z-10 flex items-center gap-1.5">
                 Start a Project
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </span>
@@ -142,7 +140,7 @@ export default function Header({ onOpenContact }) {
                 setMobileMenuOpen(false);
                 onOpenContact();
               }}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 text-xs font-bold text-black bg-gradient-to-r from-cyan-400 to-blue-400 rounded-xl shadow-lg shadow-cyan-500/20 active:scale-95 transition-all"
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 text-xs font-bold text-black bg-gradient-to-r from-cyan-400 to-blue-400 rounded-xl shadow-lg shadow-cyan-500/20 active:scale-95 transition-all cursor-pointer"
             >
               Start a Project
               <ArrowRight className="w-4 h-4" />
