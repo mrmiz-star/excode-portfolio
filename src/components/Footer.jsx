@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ArrowUp, ShieldCheck, FileText } from 'lucide-react';
-import LegalModal from './LegalModal';
 
 export default function Footer() {
-  const [legalType, setLegalType] = useState(null);
-
   const discordInviteUrl = 'https://discord.gg/MrXN6EsQTu';
 
   const navLinks = [
@@ -131,23 +128,23 @@ export default function Footer() {
             <p>© 2026 MR MIZ / EXCODE Corporation. All rights reserved.</p>
             <span className="hidden sm:inline text-slate-700">•</span>
             
-            {/* Legal Document Buttons */}
+            {/* Legal Document Links */}
             <div className="flex items-center gap-3 text-[11px]">
-              <button
-                onClick={() => setLegalType('privacy')}
+              <a
+                href="#privacy"
                 className="hover:text-cyan-300 transition-colors underline cursor-pointer flex items-center gap-1"
               >
                 <ShieldCheck className="w-3 h-3 text-cyan-400" />
                 Privacy Policy
-              </button>
+              </a>
               <span>|</span>
-              <button
-                onClick={() => setLegalType('terms')}
+              <a
+                href="#terms"
                 className="hover:text-cyan-300 transition-colors underline cursor-pointer flex items-center gap-1"
               >
                 <FileText className="w-3 h-3 text-cyan-400" />
-                Terms of Service
-              </button>
+                Terms of Use
+              </a>
             </div>
           </div>
           
@@ -161,14 +158,6 @@ export default function Footer() {
         </div>
 
       </div>
-
-      {/* Legal Modal Popup */}
-      {legalType && (
-        <LegalModal
-          type={legalType}
-          onClose={() => setLegalType(null)}
-        />
-      )}
     </footer>
   );
 }

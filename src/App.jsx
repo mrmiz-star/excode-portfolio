@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import DigitalBackground from './components/DigitalBackground';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -14,14 +14,61 @@ import FaqSection from './components/FaqSection';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import TermsOfUsePage from './components/TermsOfUsePage';
+import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 
 export default function App() {
+  const [currentHash, setCurrentHash] = useState(() => window.location.hash || '#home');
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash || '#home';
+      setCurrentHash(hash);
+
+      // Scroll handling
+      if (hash.startsWith('#terms') || hash.startsWith('#privacy')) {
+        document.title = hash.startsWith('#terms')
+          ? 'Terms of Use - MR MIZ / EXCODE Corporation'
+          : 'Privacy Policy - MR MIZ / EXCODE Corporation';
+      } else {
+        document.title = 'MR MIZ | Senior Full-Stack Developer & Lead Software Engineer | EXCODE Corporation';
+        // If navigating to a home section like #services or #projects
+        if (hash && hash !== '#home' && !hash.startsWith('#terms') && !hash.startsWith('#privacy')) {
+          const targetId = hash.replace('#', '');
+          setTimeout(() => {
+            const el = document.getElementById(targetId);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const isTermsPage = currentHash.startsWith('#terms') || currentHash.startsWith('#/terms') || currentHash === '#terms-of-use' || currentHash === '#terms-of-service';
+  const isPrivacyPage = currentHash.startsWith('#privacy') || currentHash.startsWith('#/privacy') || currentHash === '#privacy-policy';
+
   const scrollToContact = () => {
-    const el = document.getElementById('contact');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+    if (isTermsPage || isPrivacyPage) {
+      window.location.hash = '#contact';
+    } else {
+      const el = document.getElementById('contact');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
+
+  if (isTermsPage) {
+    return <TermsOfUsePage />;
+  }
+
+  if (isPrivacyPage) {
+    return <PrivacyPolicyPage />;
+  }
 
   return (
     <div className="relative min-h-screen bg-[#05070B] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-300">
@@ -77,3 +124,4 @@ export default function App() {
     </div>
   );
 }
+
