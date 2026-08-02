@@ -53,6 +53,19 @@ export default function Contact() {
       ),
       color: 'from-indigo-600/20 to-purple-500/10 border-indigo-500/30 text-indigo-400',
     },
+    {
+      id: 'youtube',
+      title: 'Official YouTube Channel',
+      actionText: 'Visit YouTube Channel →',
+      desc: 'Watch tutorials, project showcases, and updates on the official EXCODE YouTube channel.',
+      href: 'https://www.youtube.com/channel/UCdLn1JK4Qfn1jmKJnwMk-8g/',
+      svg: (
+        <svg className="w-6 h-6 fill-current text-red-500" viewBox="0 0 24 24">
+          <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/>
+        </svg>
+      ),
+      color: 'from-red-600/20 to-rose-500/10 border-red-500/30 text-red-400',
+    },
   ];
 
   return (
@@ -80,7 +93,7 @@ export default function Contact() {
         </div>
 
         {/* Direct Contact Channels Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {contactOptions.map((opt) => (
             <div
               key={opt.id}
